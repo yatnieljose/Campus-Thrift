@@ -47,15 +47,14 @@ class Account:
     @property
     def numOfRejected(self):
         return(self._numRejected)
-    
     def incNumOfRejected(self):
         self._numRejected += 1
-    @numOfRejected.setter #needed?
     def decNumOfRejected(self):
-        if numRejected != 0:
+        if self._numRejected != 0:
             self._numRejected -= 1
             
     @property
     def numOfCompleted(self):
         return(len(self._completedTrans))
-    
+    def addItem(self, item):
+        self._completedTrans.append(item)
