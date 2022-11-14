@@ -1,6 +1,6 @@
 # Campus-Thrift
 SWENG 411: Software Engineering 
-Owners: Ron Mironianski, Brett Mullen, Yatniel Ramos
+Owners: Brett Mullen, Yatniel Ramos
 
 Jamboard Link: https://jamboard.google.com/d/14kTpTynsZyq-QPTXR--zc3xNfq-2bwLj6LJeRLCXGl4/viewer?f=0
 
