@@ -19,7 +19,7 @@ window.resizable(width=False, height=False)
 # window options MyListings and ListingSearch)
 
 
-# needs configured
+# this stillneeds configured
 window.rowconfigure([0, 1, 2], minsize=200)
 window.columnconfigure(0, minsize=1000)
 
