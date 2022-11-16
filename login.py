@@ -1,27 +1,17 @@
-#!/usr/bin/python3
-# feedback_solution.py by Barron Stone
-# This is an exercise file from Python GUI Development with Tkinter on lynda.com
-
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import sys
 sys.path.append('..')
+import ct_tk
 import listing
+import sign_up
+
+filename = 'acc_info.json'
 
 class Feedback:
 
-    def __init__(self, master):
-        
-        master.title('Campus Thrift')
-        master.resizable(False, False)
-        master.configure(background = '#041E42')
-        
-        self.style = ttk.Style()
-        self.style.configure('TFrame', background = '#041E42')
-        self.style.configure('TButton', background = '#041E42')
-        self.style.configure('TLabel', background = '#041E42', font = ('Arial', 11))
-        self.style.configure('Header.TLabel', font = ('Arial', 18, 'bold'))      
+    def __init__(self, master):    
 
         self.frame_header = ttk.Frame(master)
         self.frame_header.pack()
@@ -44,21 +34,29 @@ class Feedback:
         self.entry_password.grid(row = 4, column = 2)
 
     def submit(self):
-        print('Name: {}'.format(self.entry_username.get()))
-        print('Email: {}'.format(self.entry_password.get()))
+        name = self.entry_username.get()
+        password = self.entry_password.get()
         self.clear()
-        messagebox.showinfo(title = 'Success!', message = 'Login Successful')
+        
+        with open(filename, 'r') as acc_file:
+            acc_data = json.load(acc_file)
+
+        account_login = acc_data[name]
+
+        if(account_login['password'] == password):
+            messagebox.showinfo(title = 'Success!', message = 'Login Successful')
     
     def clear(self):
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
 
     def sign_up(self):
-        Tk()
+        sign_up.main()
          
 def main():            
     
     root = Tk()
+    ct_tk.CT_Tk(root, 'Campus Thrift')
     feedback = Feedback(root)
     root.mainloop()
     
