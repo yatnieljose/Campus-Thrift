@@ -17,10 +17,10 @@ class TopFrame(ttk.Frame):
             master=self, text="Profile Picture", command=make_settings_visible)
 
         # Logo
-        self.lbl_logo = ttk.Label(master=self, text="Campus Thrift", bd=2)
+        self.lbl_logo = ttk.Label(master=self, text="Campus Thrift")
 
         # Rank and Transactions
-        self.frm_rank = ttk.Frame(master=self, bd=2)
+        self.frm_rank = ttk.Frame(master=self)
         self.lbl_rank = ttk.Label(master=self.frm_rank, text=f"Rank : ")
         self.lbl_completed_trans = ttk.Label(
             master=self.frm_rank, fg="green", text=f"Completed Transactions : ")

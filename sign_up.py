@@ -15,7 +15,7 @@ if (not(acc_file.exists())):
     with open('acc_info.json', 'w') as new_file:
         json.dump({}, new_file)
 
-class Feedback:
+class SignUpTk:
 
     def __init__(self, master):
 
@@ -72,12 +72,4 @@ class Feedback:
     def check_pw(self):
         return(self.entry_password.get() == self.entry_confirm_pw.get())
 
-    
-def main():
 
-    root = Tk()
-    ct_tk.CT_Tk(root, 'Sign-up for Campus Thrift')
-    feedback = Feedback(root)
-    root.mainloop()
-
-if __name__ == "__main__": main()

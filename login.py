@@ -4,12 +4,13 @@ from tkinter import messagebox
 import sys
 sys.path.append('..')
 import ct_tk
-import listing
+#import listing
 import sign_up
+import json
 
 filename = 'acc_info.json'
 
-class Feedback:
+class LoginFrame:
 
     def __init__(self, master):    
 
@@ -52,12 +53,3 @@ class Feedback:
 
     def sign_up(self):
         sign_up.main()
-         
-def main():            
-    
-    root = Tk()
-    ct_tk.CT_Tk(root, 'Campus Thrift')
-    feedback = Feedback(root)
-    root.mainloop()
-    
-if __name__ == "__main__": main()
