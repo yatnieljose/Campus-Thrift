@@ -7,6 +7,7 @@ from tkinter import ttk
 
 
 class ListingsSearch(ttk.Frame):
+    """Represents a ListingsSearch UI object"""
     # attributes :
     # - Search Bar to type keywords into
     # - "Search" button

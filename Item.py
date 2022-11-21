@@ -1,54 +1,69 @@
+"""Contains the Item class"""
+
+
 class Item:
-    def __init__(self, itemID, seller, price, name, typ, listing):
-        self._itemID = itemID
+    """Represents an Item object created by a user to sell"""
+
+    def __init__(self, item_id, seller, price, name, typ, listing):
+        self._item_id = item_id
         self._seller = seller
         self._price = price
         self._name = name
         self._typ = typ
         self._listing = listing
-        self._offers = [] ### object Transaction? Bid?
-    
+        self._offers = []  # object Transaction? Bid?
+
     @property
-    def getItemID(self):
-        return(self._itemID)
-    
+    def get_item_id(self):
+        """Gets the item ID associated with the current Item object"""
+        return (self._item_id)
+
     @property
-    def getSeller(self):
-        return(self._seller)
-    @getSeller.setter
-    def setSeller(self, seller):
+    def get_seller(self):
+        """Gets the seller Account associated with the current Item object"""
+        return (self._seller)
+
+    @get_seller.setter
+    def set_seller(self, seller):
         self._seller = seller
-    
+
     @property
-    def getPrice(self):
-        return(self._price)
-    @getPrice.setter
-    def setPrice(self, price):
+    def get_price(self):
+        """Gets the price associated with the current Item object"""
+        return (self._price)
+
+    @get_price.setter
+    def set_price(self, price):
         self._price = price
-        
+
     @property
-    def getName(self):
-        return(self._name)
-    @getName.setter
-    def setName(self, name):
+    def get_name(self):
+        """Gets the name associated with the current Item object"""
+        return (self._name)
+
+    @get_name.setter
+    def set_name(self, name):
         self._name = name
-        
+
     @property
-    def getType(self):
-        return(self._typ)
-    @getType.setter
-    def setType(self, typ):
+    def get_type(self):
+        """Gets the type associated with the current Item object"""
+        return (self._typ)
+
+    @get_type.setter
+    def set_type(self, typ):
         self._typ = typ
-        
+
     @property
-    def getOffers(self): #data type discussion
-        return(0)
-    
-    ### createListing
-    
+    def get_offers(self):  # data type discussion
+        """Gets offers for the current Item object"""
+        return (0)
+
+    # createListing
+
     @property
-    def getListing(self):
-        return(0)
-    
-    ### createOffer
-    
+    def get_listing(self):
+        """Gets Listing UI object associated with the current Item object"""
+        return (0)
+
+    # createOffer

@@ -1,3 +1,5 @@
+"""Contains MainFrame class and Main function instantiated by the start of the application"""
+
 from tkinter import *
 from tkinter import ttk
 import ct_tk
@@ -6,6 +8,7 @@ from Views.Frames.ListingsFrame import ListingsFrame
 
 
 class MainFrame(ttk.Frame):
+    """Represents the Main Frame attached to the current Tk object"""
 
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
@@ -19,10 +22,12 @@ class MainFrame(ttk.Frame):
         self.frame_login.pack()
 
     def login_successful(self):
+        """UI functionality instantiated by a successful login"""
         self.frame_login.destroy()
         self.frame_listings_frame.pack()
 
     def log_out(self):
+        """UI functionality instantiated by user log out"""
         # this will exist as a "Log Out" button in the Account-Settings window
         self.frame_listings_frame.destroy()
 
@@ -32,6 +37,7 @@ class MainFrame(ttk.Frame):
 
 
 def main():
+    """Main function for this module"""
     root = Tk()
     ct_tk.CT_Tk(root, 'Campus Thrift')
     MainFrame(root)

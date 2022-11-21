@@ -1,16 +1,19 @@
+"""Contains the LoginFrame class"""
+
 import sys
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
+from SignUpTk import SignUpTk
 import ct_tk
-from Views.Windows.SignUpTk import SignUpTk
 import json
 sys.path.append('..')
 
-filename = 'acc_info.json'
+FILENAME = 'acc_info.json'
 
 
 class LoginFrame(ttk.Frame):
+    """Represents a LoginFrame UI object"""
 
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
@@ -50,7 +53,7 @@ class LoginFrame(ttk.Frame):
         password = self.entry_password.get()
         self.clear()
 
-        with open(filename, 'r') as acc_file:
+        with open(FILENAME, 'r') as acc_file:
             acc_data = json.load(acc_file)
 
         account_login = acc_data[name]

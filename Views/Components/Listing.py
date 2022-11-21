@@ -3,6 +3,7 @@ from tkinter import ttk
 
 
 class Listing(ttk.Frame):
+    """Represents a Listing UI object"""
 
     def __init__(self, master, name, price, loc_x, loc_y):
         ttk.Frame.__init__(self, master)

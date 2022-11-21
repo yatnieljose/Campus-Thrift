@@ -1,8 +1,11 @@
+"""Contains CT_Tk class"""
+
 from tkinter import *
 from tkinter import ttk
 
 
 class CT_Tk:
+    """Represents a CT_Tk styling object"""
 
     master = None
 

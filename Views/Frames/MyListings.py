@@ -8,6 +8,7 @@ from Views.Frames.TopFrame import TopFrame
 
 
 class MyListings(ttk.Frame):
+    """Represents a MyListings UI object"""
     # attributes :
     # - Create a Listing button (opens popup window)
     # - Edit a Listing button (opens popup window)
