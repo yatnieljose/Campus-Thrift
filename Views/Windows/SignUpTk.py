@@ -1,22 +1,25 @@
+"""Contains the SignUpTk class"""
+
 from pathlib import Path
 import json
-import ct_tk
 from tkinter import *
 from tkinter import ttk
 import sys
+import ct_tk
 sys.path.append('..')
 
 
-filepath = '../acc_info.json'
-filename = 'acc_info.json'
-acc_file = Path(filename)
+FILEPATH = '../acc_info.json'
+FILENAME = 'acc_info.json'
+ACC_FILE = Path(FILENAME)
 
-if (not (acc_file.exists())):
-    with open('acc_info.json', 'w') as new_file:
+if not ACC_FILE.exists():
+    with open('acc_info.json', 'w', encoding="utf8") as new_file:
         json.dump({}, new_file)
 
 
 class SignUpTk(Tk):
+    """Represents a SignUpTk popup window within the LoginFrame object"""
 
     def __init__(self):
         Tk.__init__(self)
@@ -68,15 +71,15 @@ class SignUpTk(Tk):
 
     def submit(self):
 
-        with open(filename, 'r') as acc_file:
-            acc_data = json.load(acc_file)
+        with open(FILENAME, 'r', encoding="utf8") as ACC_FILE:
+            acc_data = json.load(ACC_FILE)
 
         if (self.check_pw()):
             acc_id = self.entry_email.get()
             acc_data[acc_id] = {}
             acc_data[acc_id]['name'] = self.entry_name.get()
             acc_data[acc_id]['password'] = self.entry_password.get()
-            with open(filename, 'w') as acc_write:
+            with open(FILENAME, 'w', encoding="utf8") as acc_write:
                 json.dump(acc_data, acc_write)
             self.destroy()
         else:

@@ -1,22 +1,24 @@
 from tkinter import *
 from tkinter import ttk
-import ct_tk
 from PIL import Image, ImageTk
+import ct_tk
 
 
 def make_settings_visible():
+    """Reaction to user requesting to open the account settings (click on profile picture / settings icon)"""
     pass
 
 
 class TopFrame(ttk.Frame):
+    """References a TopFrame object for the banner of the MainFrame after login"""
+
     def __init__(self, master):
-        # set the height of the frame throughout the class, call super's constructor
         self.height = 100
-        ttk.Frame.__init__(self, master, height=500)
+        ttk.Frame.__init__(self, master)
 
         # frame for profile picture
         self.frm_prof_pic = ttk.Frame(
-            master=self, width=self.height, height=self.height, padding=(20, 20, 0, 0))
+            master=self, width=self.height, height=self.height)
 
         # open profile picture, resize, and store as instance variable
         prof_pic_orig = Image.open("thriftanyLion.png")
@@ -26,6 +28,7 @@ class TopFrame(ttk.Frame):
 
         # create button for profile picture
         # cannot figure out why it looks like ths!
+        self.img_label = ttk.Label(image=self.prof_pic)
         self.btn_prof_pic = ttk.Button(
             master=self.frm_prof_pic, image=self.prof_pic, command=make_settings_visible)
 
@@ -33,7 +36,7 @@ class TopFrame(ttk.Frame):
 
         # frame for logo
         self.frm_logo = ttk.Frame(
-            master=self, height=self.height, width=500, padding=(50, 20, 0, 0))
+            master=self, height=self.height, width=500)
 
         # open logo, resize, and store as instance variable
         logo_orig = Image.open("ct_wordart.png")
@@ -53,9 +56,7 @@ class TopFrame(ttk.Frame):
         self.lbl_rank.pack(side=TOP)
         self.lbl_completed_trans.pack(side=TOP)
 
-        self.frm_prof_pic.pack(side=LEFT)
-        self.frm_prof_pic.pack_propagate(0)
-        self.frm_logo.pack(side=LEFT)
-        self.frm_logo.pack_propagate(0)
-        self.frm_rank.pack(side=LEFT)
-        self.frm_rank.pack_propagate(0)
+        self.frm_logo.grid(row=0, column=1, rowspan=2,
+                           padx=50, sticky="n")
+        self.frm_prof_pic.grid(row=0, column=0)
+        self.frm_rank.grid(row=0, column=2, rowspan=2)

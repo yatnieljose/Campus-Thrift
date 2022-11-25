@@ -4,7 +4,7 @@ import sys
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
-from SignUpTk import SignUpTk
+from Views.Windows.SignUpTk import SignUpTk
 import ct_tk
 import json
 sys.path.append('..')
@@ -53,7 +53,7 @@ class LoginFrame(ttk.Frame):
         password = self.entry_password.get()
         self.clear()
 
-        with open(FILENAME, 'r') as acc_file:
+        with open(FILENAME, 'r', encoding="utf8") as acc_file:
             acc_data = json.load(acc_file)
 
         account_login = acc_data[name]

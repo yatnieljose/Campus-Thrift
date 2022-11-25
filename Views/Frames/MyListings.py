@@ -19,7 +19,7 @@ class MyListings(ttk.Frame):
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
 
-        self.frm_dummy = ttk.Frame(
-            master=self, width=900, height=600, relief=RIDGE)
-        self.frm_dummy.pack()
-        self.frm_dummy.pack_propagate(0)
+        self.frm_container = ttk.Frame(
+            master=self, width=900, height=550, relief=RIDGE)
+        self.frm_container.grid(sticky="ns")
+        self.frm_container.pack_propagate(0)
