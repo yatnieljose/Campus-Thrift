@@ -1,0 +1,27 @@
+CREATE TABLE [Accounts] ( 
+	[AccountId] INTEGER  NOT NULL PRIMARY KEY, 
+	[FirstName] NVARCHAR(50)  NOT NULL
+    [MiddleInitial] NVARCHAR(1)  NOT NULL
+    [LastName] NVARCHAR(50)  NOT NULL  
+    [Email] NVARCHAR(50)  NOT NULL
+    [Bio] NVARCHAR(250)  NOT NULL
+    [ProfilePicture] BLOB  NOT NULL
+    [Rank] INTEGER NOT NULL
+    [NumCompleted] INTEGER NOT NULL
+); 
+CREATE TABLE [Items] (  
+	[ItemId] INTEGER  PRIMARY KEY NOT NULL,
+	[SellerId] INTEGER NOT NULL,   
+    [Name] NVARCHAR(50) NOT NULL,
+	[Price] INTEGER NOT NULL,
+    [TypeId] INTEGER NOT NULL
+);     
+CREATE TABLE [Receipts] (  
+	[ItemId] INTEGER  NOT NULL PRIMARY KEY,  
+	[BuyerId] INTEGER NOT NULL PRIMARY KEY,  
+); 
+
+CREATE TABLE [Types] (
+    [TypeId] INTEGER NOT NULL PRIMARY KEY,
+    [Name] NVARCHAR(50) NOT NULL
+);

@@ -20,6 +20,6 @@ class ListingsSearch(ttk.Frame):
         ttk.Frame.__init__(self, master)
 
         self.frm_container = ttk.Frame(
-            master=self, width=900, height=550, relief=GROOVE)
+            master=self, width=1400, height=550, relief=GROOVE)
         self.frm_container.grid(sticky="ns")
         self.frm_container.pack_propagate(0)
