@@ -1,10 +1,10 @@
-from tkinter import *
-from tkinter import ttk
+"""Contains ListingsFrame class for toggling between MyListings and ListingsSearch"""
+
+from tkinter import ttk, TOP
 from Views.Frames.TopFrame import TopFrame
 from Views.Frames.SelectionFrame import SelectionFrame
 from Views.Frames.MyListings import MyListings
 from Views.Frames.ListingsSearch import ListingsSearch
-import ct_tk
 
 # main frame for MyListings and ListingsSearch
 # displays MyListings by default
@@ -27,18 +27,22 @@ class ListingsFrame(ttk.Frame):
         self.my_listings_shown = True
 
     def init_selection(self):
+        """Initializes a SelectionFrame object and packs it into this frame"""
         self.frame_selection = SelectionFrame(self)
         self.frame_selection.pack(side=TOP, pady=10)
 
     def init_top_frame(self):
+        """Initializes a TopFrame object and packs it into this frame"""
         self.frame_top_frame = TopFrame(self)
         self.frame_top_frame.pack(side=TOP, pady=10, padx=10)
 
     def init_my_listings(self):
+        """Initializes a MyListings object and packs it into this frame"""
         self.frame_my_listings = MyListings(self)
         self.frame_my_listings.pack(side=TOP, pady=10, padx=10)
 
     def init_listings_search(self):
+        """Initializes a ListingsSearch object and packs it into this frame"""
         self.frame_listings_search = ListingsSearch(self)
         self.frame_listings_search.pack(side=TOP, pady=10, padx=10)
 
@@ -59,14 +63,3 @@ class ListingsFrame(ttk.Frame):
             self.frame_listings_search.destroy()
             self.init_my_listings()
             self.my_listings_shown = True
-
-
-def main():
-    root = Tk()
-    ct_tk.CT_Tk(root, 'Campus Thrift')
-    ListingsFrame(root).pack()
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    main()

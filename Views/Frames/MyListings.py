@@ -2,8 +2,7 @@
 # Separate tables for current user-made Listings (SellerListing)  and current Listings user has highest
 # bid on (BuyerListing)
 
-from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, RIDGE
 from Views.Frames.TopFrame import TopFrame
 
 

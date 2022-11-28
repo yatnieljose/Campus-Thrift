@@ -1,12 +1,11 @@
 CREATE TABLE [Accounts] ( 
-	[AccountId] INTEGER  NOT NULL PRIMARY KEY, 
-	[FirstName] NVARCHAR(50)  NOT NULL
-    [MiddleInitial] NVARCHAR(1)  NOT NULL
-    [LastName] NVARCHAR(50)  NOT NULL  
-    [Email] NVARCHAR(50)  NOT NULL
-    [Bio] NVARCHAR(250)  NOT NULL
-    [ProfilePicture] BLOB  NOT NULL
-    [Rank] INTEGER NOT NULL
+	[AccountId] INTEGER PRIMARY KEY, 
+	[Name] NVARCHAR(50)  NOT NULL, 
+    [Email] NVARCHAR(50)  NOT NULL,
+    [Password] NVARCHAR(50) NOT NULL,
+    [Bio] NVARCHAR(250)  NOT NULL,
+    [ProfilePicture] BLOB,
+    [Rank] INTEGER NOT NULL,
     [NumCompleted] INTEGER NOT NULL
 ); 
 CREATE TABLE [Items] (  
@@ -17,8 +16,9 @@ CREATE TABLE [Items] (
     [TypeId] INTEGER NOT NULL
 );     
 CREATE TABLE [Receipts] (  
-	[ItemId] INTEGER  NOT NULL PRIMARY KEY,  
-	[BuyerId] INTEGER NOT NULL PRIMARY KEY,  
+    [ReceiptId] INTEGER NOT NULL PRIMARY KEY,
+	[ItemId] INTEGER  NOT NULL,  
+	[BuyerId] INTEGER NOT NULL
 ); 
 
 CREATE TABLE [Types] (

@@ -1,9 +1,10 @@
+"""Contains ListingsSearch class to show a search bar and a sorted list of populated listings"""
+
 # From Sequence Diagrams
 # Shows Search Bar and a sorted list of populated Listings (most popular first if no search has been
 # conducted)
 
-from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, GROOVE
 
 
 class ListingsSearch(ttk.Frame):

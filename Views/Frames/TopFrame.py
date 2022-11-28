@@ -1,7 +1,7 @@
-from tkinter import *
-from tkinter import ttk
+"""Contains TopFrame class"""
+
+from tkinter import ttk, TOP
 from PIL import Image, ImageTk
-import ct_tk
 
 
 def make_settings_visible():
@@ -46,7 +46,7 @@ class TopFrame(ttk.Frame):
 
         self.lbl_logo.pack()
 
-        # Rank and Transactions
+        # Rank and Transactions (we will need data to populate rank and transaction within "text" attribute of each Label)
         self.frm_rank = ttk.Frame(
             master=self, height=self.height, width=200)
         self.lbl_rank = ttk.Label(master=self.frm_rank, text=f"Rank : ")

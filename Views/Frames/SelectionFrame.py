@@ -1,8 +1,11 @@
-from tkinter import *
+"""Contrains the SelectionFrame class"""
+
 from tkinter import ttk
 
 
 class SelectionFrame(ttk.Frame):
+    """Represents a SelectionFrame UI object to toggle between the MyListings view and the ListingsSearch view"""
+
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
 

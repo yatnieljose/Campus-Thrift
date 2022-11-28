@@ -1,6 +1,5 @@
 """Contains CT_Tk class"""
 
-from tkinter import *
 from tkinter import ttk
 
 

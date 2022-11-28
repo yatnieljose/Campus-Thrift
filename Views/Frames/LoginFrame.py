@@ -1,15 +1,6 @@
 """Contains the LoginFrame class"""
 
-import sys
-from tkinter import messagebox
-from tkinter import ttk
-from tkinter import *
-from Views.Windows.SignUpTk import SignUpTk
-import ct_tk
-import json
-sys.path.append('..')
-
-FILENAME = 'acc_info.json'
+from tkinter import PhotoImage, messagebox, ttk
 
 
 class LoginFrame(ttk.Frame):
@@ -38,7 +29,7 @@ class LoginFrame(ttk.Frame):
         ttk.Button(self.frame_content, text='Sign up', command=self.sign_up).grid(
             row=3, column=0, padx=5, pady=5)
         ttk.Button(self.frame_content, text='Submit',
-                   command=self.submit).grid(row=4, column=0)
+                   command=self.try_login).grid(row=4, column=0)
         # Entry widgets
         self.entry_username = ttk.Entry(
             self.frame_content, width=24, font=('Arial', 10))
@@ -47,28 +38,24 @@ class LoginFrame(ttk.Frame):
         self.entry_username.grid(row=4, column=1, padx=5, pady=5, sticky='w')
         self.entry_password.grid(row=4, column=2)
 
-    def submit(self):
-        # eventually will check a database
-        name = self.entry_username.get()
-        password = self.entry_password.get()
-        self.clear()
+    def try_login(self):
+        """Checks credentials of attempted login"""
 
-        with open(FILENAME, 'r', encoding="utf8") as acc_file:
-            acc_data = json.load(acc_file)
-
-        account_login = acc_data[name]
-
-        if (account_login['password'] == password):
-            # call MainFrame function to delete this and show ListingsFrame
+        # if database contains a username/password match, initiate login_successful functionality. Else,
+        # clear the Entry widgets and show an error message
+        if (self.master.try_login(self.entry_username.get(), self.entry_password.get())):
+            # this changes the current display to reflect successful login
             self.master.login_successful()
         else:
-            messagebox.showinfo(title="Failure!",
+            self.clear()
+            messagebox.showinfo(title="LoginFailure",
                                 message="Login Unsuccessful")
 
     def clear(self):
+        """Clears the current user entries representing username and password"""
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
 
     def sign_up(self):
-        tk_sign_up = SignUpTk()
-        tk_sign_up.mainloop()
+        """Launches a sign up window for user to create an account"""
+        self.master.display_signuptk()
