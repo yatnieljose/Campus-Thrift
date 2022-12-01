@@ -35,3 +35,8 @@ class AccountHandler:
         if login attempt is unsuccessful"""
 
         return self.db_handler.check_username_pw_match(username, password)
+
+    
+    def get_account_info(self, username, password):
+        """Gets all account information"""
+        return self.db_handler.get_account(username, password)

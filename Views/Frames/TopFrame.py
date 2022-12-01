@@ -1,6 +1,6 @@
 """Contains TopFrame class"""
 
-from tkinter import ttk, TOP
+from tkinter import ttk, TOP, PhotoImage, messagebox, Button, Label
 from PIL import Image, ImageTk
 
 
@@ -11,6 +11,7 @@ def make_settings_visible():
 
 class TopFrame(ttk.Frame):
     """References a TopFrame object for the banner of the MainFrame after login"""
+    #Main -> MainFrame -> ListingsFrame ->
 
     def __init__(self, master):
         self.height = 100
@@ -21,22 +22,22 @@ class TopFrame(ttk.Frame):
             master=self, width=self.height, height=self.height)
 
         # open profile picture, resize, and store as instance variable
-        prof_pic_orig = Image.open("thriftanyLion.png")
-        prof_pic_resize = prof_pic_orig.resize(
-            (self.height, self.height))
-        self.prof_pic = ImageTk.PhotoImage(prof_pic_resize)
-
         # create button for profile picture
-        # cannot figure out why it looks like ths!
-        self.img_label = ttk.Label(image=self.prof_pic)
-        self.btn_prof_pic = ttk.Button(
-            master=self.frm_prof_pic, image=self.prof_pic, command=make_settings_visible)
+        self.frm_prof_pic.profile_photo = Image.open("ct_profile.jpeg")
+        self.frm_prof_pic.profile_photo = self.frm_prof_pic.profile_photo.resize((self.height, self.height), Image.ANTIALIAS)
+        self.image_tk = ImageTk.PhotoImage(image=self.frm_prof_pic.profile_photo)
+        self.btn_prof_pic = Button(
+            self.frm_prof_pic, image=self.image_tk, 
+            height=self.height, width=self.height, 
+            command=self.open_settings)
+        self.setting_label = Label(self.frm_prof_pic, text="Setting")
 
         self.btn_prof_pic.pack()
+        self.setting_label.pack()
 
         # frame for logo
         self.frm_logo = ttk.Frame(
-            master=self, height=self.height, width=500)
+            master=self)#, height=self.height, width=500)
 
         # open logo, resize, and store as instance variable
         logo_orig = Image.open("ct_wordart.png")
@@ -60,3 +61,7 @@ class TopFrame(ttk.Frame):
                            padx=50, sticky="n")
         self.frm_prof_pic.grid(row=0, column=0)
         self.frm_rank.grid(row=0, column=2, rowspan=2)
+
+    def open_settings(self):
+        messagebox.showinfo(title="Test", message="Setting button works!")
+        print(self.master.master)

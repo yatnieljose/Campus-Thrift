@@ -8,8 +8,8 @@ class CT_Tk:
 
     master = None
 
-    def __init__(self, component, title):
-        self.master = component
+    def __init__(self, tk, title):
+        self.master = tk
         self.master.title(title)
         self.master.resizable(False, False)
         self.master.configure(background='#041E42')
@@ -21,3 +21,6 @@ class CT_Tk:
             'TLabel', background='#041E42', font=('Arial', 11))
         self.master.style.configure(
             'Header.TLabel', font=('Arial', 18, 'bold'))
+
+
+

@@ -13,6 +13,7 @@ from Views.Frames.ListingsSearch import ListingsSearch
 
 class ListingsFrame(ttk.Frame):
     """Represents a ListingFrame UI object"""
+    #Main -> MainFrame
 
     def __init__(self, master):
         ttk.Frame.__init__(self, master)

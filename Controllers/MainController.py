@@ -2,6 +2,7 @@
 and act as an interface between each Handler object and the Views that they interact with"""
 
 from tkinter import messagebox
+from Models.Account import Account
 from Controllers.AccountHandler import AccountHandler
 from Controllers.ItemHandler import ItemHandler
 from Controllers.TransactionHandler import TransactionHandler
@@ -17,6 +18,7 @@ class MainController:
         self.account_handler = AccountHandler(self.db_handler)
         self.item_handler = ItemHandler(self.db_handler)
         self.transaction_handler = TransactionHandler(self.db_handler)
+        self.current_account = None
 
         # self.username, self.email, self.password, self.bio
         # !!! vvv We must refresh these items using ItemHandler and TransactionHandler?? or do we just
@@ -34,7 +36,14 @@ class MainController:
         """Checks for account with username and password. Populates account information if true, returns False if 
         login attempt is unsuccessful. Called from Main"""
 
-        return self.account_handler.try_login(username, password)
+        self.loggingIn = self.account_handler.try_login(username, password)
+
+        if (self.loggingIn):
+            account_info = self.account_handler.get_account_info(username, password)
+            account_info = account_info[0] ###returns single tuple
+            self.current_account = Account(account_info[0], account_info[1], account_info[2], account_info[3])
+
+        return(self.loggingIn)
 
     def reset(self):
         """Resets this controller when account is unbinded"""

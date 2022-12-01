@@ -15,6 +15,7 @@ class MainFrame(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.controller = controller
         self.pack()
+        self.controller.account = None
 
         # we must create all component in the constructor
         self.frame_login = LoginFrame(self)
@@ -55,6 +56,8 @@ def main():
 
     controller = MainController()
     root = Tk()
+    styler = ttk.Style()
+    styler.configure("TFrame", background="#041E42")
     ct_tk.CT_Tk(root, 'Campus Thrift')
     MainFrame(root, controller)
     root.mainloop()

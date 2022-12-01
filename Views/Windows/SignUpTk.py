@@ -72,15 +72,11 @@ class SignUpTk(Tk):
                                    'password': self.entry_password.get(), 'bio': self.entry_bio.get("1.0", END)}
 
             self.controller.try_signup(signup_account_info)
+            self.destroy()
         else:
             self.entry_password.delete(0, len(self.entry_password.get()))
             self.entry_confirm_pw.delete(0, len(self.entry_confirm_pw.get()))
 
-        self.destroy()
-
-    def check_pw(self):
-        """Returns True if passwords match, False if not"""
-        return (self.entry_password.get() == self.entry_confirm_pw.get())
 
     # Untested -- validate_input()
     def validate_input(self):

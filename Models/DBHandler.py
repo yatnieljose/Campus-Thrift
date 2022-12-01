@@ -59,3 +59,16 @@ class DbHandler:
         res = self.cursor.fetchone()
 
         return (res is not None)
+
+    def get_account(self, username, password):
+        """Retrieves user sql tuple"""
+
+        self.cursor.execute(f"""
+                            SELECT Name, Email, Password, Bio, Rank
+                            FROM Accounts 
+                            WHERE Name="{username}" AND Password="{password}"
+                            """)
+
+        res = self.cursor.fetchall()
+
+        return (res)
