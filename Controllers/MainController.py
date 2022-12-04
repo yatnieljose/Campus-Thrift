@@ -27,23 +27,30 @@ class MainController:
         # List of CompletedTransactions
 
     def try_signup(self, signup_account_info):
-        """Attempts to create new account information based on given user input. Called from SignUpTk"""
+        """Attempts to create new account information based on given user input"""
+        # SignUpTk ->
+
         # fields are validated before they are encountered in this function
 
         self.account_handler.try_signup(signup_account_info)
 
     def try_login(self, username, password):
         """Checks for account with username and password. Populates account information if true, returns False if 
-        login attempt is unsuccessful. Called from Main"""
+        login attempt is unsuccessful"""
+        # LoginFrame -> MainFrame ->
 
-        self.loggingIn = self.account_handler.try_login(username, password)
+        # returns AccountId if found, else None (falsy)
+        account_id = self.account_handler.try_login(username, password)
 
-        if (self.loggingIn):
-            account_info = self.account_handler.get_account_info(username, password)
-            account_info = account_info[0] ###returns single tuple
-            self.current_account = Account(account_info[0], account_info[1], account_info[2], account_info[3])
-
-        return(self.loggingIn)
+        if (account_id is None):
+            return False
+        else:
+            # AccountHandler handles Accounts, sooooo it should return an Account object in my opinion
+            # MainController should handle AccountId and call AccountHandler any time it needs to use an account
+            # in the database. We will be working with so many accounts when making Listings, and I think
+            # this is the best way to encapsulate all of the information
+            self.current_account = self.account_handler.get_account(account_id)
+            return True
 
     def reset(self):
         """Resets this controller when account is unbinded"""

@@ -12,6 +12,7 @@ class DbHandler:
 
     def username_exists(self, username):
         """Directly checks database for the existence of this username"""
+        # SignUpTk -> MainController -> AccountHandler ->
 
         self.cursor.execute(f"""
                             SELECT * FROM Accounts WHERE Name="{username}"
@@ -22,6 +23,7 @@ class DbHandler:
 
     def email_exists(self, email):
         """Directly checks database for the existence of this email address"""
+        # SignUpTk -> MainController -> AccountHandler ->
 
         self.cursor.execute(f"""
                             SELECT * FROM Accounts WHERE Email="{email}"
@@ -33,6 +35,7 @@ class DbHandler:
 
     def create_account(self, signup_account_info):
         """Creates an account in the database. Returns True if it is successfully created, and returns false if not """
+        # SignUpTk -> MainController -> AccountHandler -> DbHandler
 
         username = signup_account_info['name']
         email = signup_account_info['email']
@@ -41,8 +44,8 @@ class DbHandler:
 
         # Creates an entry in Accounts table with passed in values
         self.cursor.execute(f"""
-            INSERT INTO Accounts (Name, Email, Password, Bio, ProfilePicture, Rank, NumCompleted) VALUES
-            ("{username}", "{email}", "{password}", "{bio}", "", "0", "0")
+            INSERT INTO Accounts (Name, Email, Password, Bio, ProfilePicture, Rank) VALUES
+            ("{username}", "{email}", "{password}", "{bio}", "", "0")
         """)
 
         self.conn.commit()
@@ -51,24 +54,74 @@ class DbHandler:
     def check_username_pw_match(self, username, password):
         """Directly checks database for a username/password match. Returns True if it finds a match,
         False if it does not"""
+        # LoginFrame -> MainFrame -> MainController -> AccountHandler ->
 
         self.cursor.execute(f"""
-                            SELECT * FROM Accounts WHERE Name="{username}" AND Password="{password}"
+                            SELECT AccountId FROM Accounts WHERE Name="{username}" AND Password="{password}"
                             """)
 
         res = self.cursor.fetchone()
 
-        return (res is not None)
+        # returns AccountId if it is found, else returns None
+        return (res[0])
 
-    def get_account(self, username, password):
-        """Retrieves user sql tuple"""
+    # untested
+    def get_account_info(self, account_id):
+        """Retrieves account information based on input AccountId"""
+        # MainController -> AccountHandler ->
 
         self.cursor.execute(f"""
-                            SELECT Name, Email, Password, Bio, Rank
-                            FROM Accounts 
-                            WHERE Name="{username}" AND Password="{password}"
+                            SELECT Name, Email, Password, Bio, ProfilePicture, Rank
+                            FROM Accounts
+                            WHERE AccountId="{account_id}"
+                            """)
+
+        res = self.cursor.fetchone()
+        print(res)
+
+        account_info = {
+            'name': res[0], 'email': res[1], 'password': res[2], 'bio': res[3], 'profile_picture': res[4],
+            'rank': res[5]
+        }
+
+        return (account_info)
+
+    # untested
+    def get_receipts(self, account_id):
+        """Retrieves all receipts based on input AccountId, and returns ReceiptId for each"""
+        # Account -> AccountHandler ->
+
+        receipts = None
+
+        # fetch receipts with this account as BuyerId
+        self.cursor.execute(f"""
+                            SELECT ReceiptId
+                            FROM Receipts
+                            WHERE BuyerId = "{account_id}"
                             """)
 
         res = self.cursor.fetchall()
 
-        return (res)
+        # append receipts where account_id is BuyerId
+        for receipt_id in res:
+            receipts.append(receipt_id)
+
+        # fetch items where account_id is seller_id
+        res = self.cursor.execute(f"""
+                            SELECT ItemId
+                            FROM Items
+                            WHERE SellerId = "{account_id}"
+                            """)
+
+        # for each item, fetch ReceiptId and append
+        for item_id in res:
+            receipt_ids = self.cursor.execute(f"""
+                                              SELECT ReceiptId
+                                              FROM Receipts
+                                              WHERE ItemId = "{item_id}"
+                                              """)
+
+            for receipt_id in receipt_ids:
+                receipts.append(receipt_id)
+
+        return receipts

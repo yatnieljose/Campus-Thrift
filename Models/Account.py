@@ -1,60 +1,105 @@
+"""Contains the Account class"""
+
+
 class Account:
-    def __init__(self, name, email, bio="NONE"):
-            self._name = name         #str
-            self._email = email       #str
-            self._bio = bio           #str
-            self._rank = 1            #int
-            self._profilePicture = "" #str of the picture path, default needed
-            self._numRejected = 0     #int
-            self._completedTrans = [] #list
-            self._listedItems = []    #list
-            
+    """Represents all information regarding an Account in the system"""
+
+    def __init__(self, account_handler, account_id, name, email, password, bio, profile_picture, rank):
+        self._account_handler = account_handler                     # AccountHandler object
+        self._account_id = account_id                               # int
+        self._name = name                                           # str
+        self._email = email                                         # str
+        self._password = password                                   # str
+        self._bio = bio                                             # str
+        # Blob, when do we turn it into Image?
+        self._profile_picture = profile_picture
+        self._rank = rank                                           # int
+        self._receipts = self.retrieve_receipts()                   # List of ints
+        self._num_completed = self.get_num_completed
+
     @property
-    def getName(self):
-        return(self._name)
-    @getName.setter
-    def setName(self, newName):
-        self._name = newName
-        
+    def get_name(self):
+        """Returns name associated with account"""
+
+        return (self._name)
+
+    @get_name.setter
+    def set_name(self, new_name):
+        self._name = new_name
+
     @property
-    def getEmail(self):
-        return(self._email)
-    @getEmail.setter
-    def setEmail(self, newEmail):
-        self._email = newEmail
-        
+    def get_email(self):
+        """Returns email associated with account"""
+
+        return (self._email)
+
+    @get_email.setter
+    def set_email(self, new_email):
+        self._email = new_email
+
     @property
-    def getBio(self):
-        return(self._bio)
-    @getBio.setter
-    def setBio(self, newBio):
-        self._bio = newBio
-        
+    def get_password(self):
+        """Returns password associated with account"""
+
+        return (self._password)
+
+    @get_password.setter
+    def set_password(self, new_password):
+        self._password = new_password
+
     @property
-    def getRank(self):
-        return(self._rank)
-    @getRank.setter
-    def setRank(self, newRank):
-        self._rank = newRank
-        
+    def get_bio(self):
+        """Returns bio associated with account"""
+
+        return (self._bio)
+
+    @get_bio.setter
+    def set_bio(self, new_bio):
+        self._bio = new_bio
+
     @property
-    def getProfilePicture(self):
-        return(self._profilePicture)
-    @getProfilePicture.setter
-    def setProfilePicture(self, newPicture):
-        self._profilePicture = newPicture
-        
+    def get_profile_picture(self):
+        """Returns profile picture associated with account"""
+
+        return (self._profile_picture)
+
+    @get_profile_picture.setter
+    def set_profile_picture(self, new_profile_picture):
+        self._profile_picture = new_profile_picture
+
     @property
-    def numOfRejected(self):
-        return(self._numRejected)
-    def incNumOfRejected(self):
-        self._numRejected += 1
-    def decNumOfRejected(self):
-        if self._numRejected != 0:
-            self._numRejected -= 1
-            
+    def get_rank(self):
+        """Returns rank associated with account"""
+
+        return (self._rank)
+
+    @get_rank.setter
+    def set_rank(self, new_rank):
+        self._rank = new_rank
+
     @property
-    def numOfCompleted(self):
-        return(len(self._completedTrans))
-    def addItem(self, item):
-        self._completedTrans.append(item)
+    def get_receipts(self):
+        """Returns all receipts associated with account"""
+
+        return self._receipts
+
+    @property
+    def get_num_completed(self):
+        """Returns the number of completed transactions associated with account"""
+
+        if self._receipts is None:
+            return 0
+        else:
+            return len(self._receipts)
+
+    def retrieve_receipts(self):
+        """Returns ReceiptId of all receipts associated with this account from the database"""
+
+        return self._account_handler.get_receipts(self._account_id)
+
+    # unnecessary if we update this when receipt is added to database (we just havent done that yet)
+    def add_receipt(self, receipt_id):
+        """Records the ReceiptId from a completed transaction from account, and updates self._num_completed"""
+
+        self._receipts.append(receipt_id)
+        self._num_completed = self.get_num_completed

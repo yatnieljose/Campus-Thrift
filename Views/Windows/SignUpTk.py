@@ -77,8 +77,8 @@ class SignUpTk(Tk):
             self.entry_password.delete(0, len(self.entry_password.get()))
             self.entry_confirm_pw.delete(0, len(self.entry_confirm_pw.get()))
 
-
     # Untested -- validate_input()
+
     def validate_input(self):
         """Check user input to validate account fields"""
 

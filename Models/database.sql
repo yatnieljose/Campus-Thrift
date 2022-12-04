@@ -5,8 +5,7 @@ CREATE TABLE [Accounts] (
     [Password] NVARCHAR(50) NOT NULL,
     [Bio] NVARCHAR(250)  NOT NULL,
     [ProfilePicture] BLOB,
-    [Rank] INTEGER NOT NULL,
-    [NumCompleted] INTEGER NOT NULL
+    [Rank] INTEGER NOT NULL
 ); 
 CREATE TABLE [Items] (  
 	[ItemId] INTEGER  PRIMARY KEY NOT NULL,

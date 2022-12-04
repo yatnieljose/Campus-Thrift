@@ -30,7 +30,9 @@ class MainFrame(ttk.Frame):
         signup_tk.mainloop()
 
     def try_login(self, username, password):
-        """Calls controller to try login, controller returns false if login is unsuccessful. Called from LoginFrame"""
+        """Calls controller to try login, controller returns false if login is unsuccessful"""
+        # LoginFrame ->
+
         return self.controller.try_login(username, password)
 
     def login_successful(self):
