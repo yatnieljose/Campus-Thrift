@@ -2,7 +2,7 @@
 
 from tkinter import Tk, PhotoImage, Text, messagebox, ttk, END
 import sys
-import ct_tk
+import Views.Styling.ct_tk as ct_tk
 sys.path.append('..')
 
 

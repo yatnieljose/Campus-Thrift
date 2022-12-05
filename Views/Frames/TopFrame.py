@@ -20,6 +20,7 @@ class TopFrame(ttk.Frame):
         # frame for profile picture
         self.frm_prof_pic = ttk.Frame(
             master=self, width=self.height, height=self.height)
+        self.master = master
 
         # open profile picture, resize, and store as instance variable
         # create button for profile picture
@@ -29,7 +30,7 @@ class TopFrame(ttk.Frame):
         self.btn_prof_pic = Button(
             self.frm_prof_pic, image=self.image_tk, 
             height=self.height, width=self.height, 
-            command=self.open_settings)
+            command=self.open_manage_account_tk)
         self.setting_label = Label(self.frm_prof_pic, text="Setting")
 
         self.btn_prof_pic.pack()
@@ -62,6 +63,7 @@ class TopFrame(ttk.Frame):
         self.frm_prof_pic.grid(row=0, column=0)
         self.frm_rank.grid(row=0, column=2, rowspan=2)
 
-    def open_settings(self):
-        messagebox.showinfo(title="Test", message="Setting button works!")
-        print(self.master.master)
+        self.frm_prof_pic.profile_photo.close()
+
+    def open_manage_account_tk(self):
+        self.master.display_manage_account_tk()

@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import ct_tk
+import Views.Styling.ct_tk as ct_tk
 
 
 class Listing(ttk.Frame):
@@ -37,14 +37,3 @@ class Listing(ttk.Frame):
         """Initiates the Select button for the listing"""
         self.btn_select = ttk.Button(self, text="Select")
         self.btn_select.grid(row=0, column=3, padx=15, sticky="e")
-
-
-def main():
-    root = Tk()
-    ct_tk.CT_Tk(root, 'Campus Thrift')
-    Listing(root, "Math250 Textbook", 20, "textbook").grid()
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    main()

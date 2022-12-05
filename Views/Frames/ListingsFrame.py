@@ -1,10 +1,11 @@
 """Contains ListingsFrame class for toggling between MyListings and ListingsSearch"""
 
-from tkinter import ttk, TOP
+from tkinter import ttk, TOP, messagebox
 from Views.Frames.TopFrame import TopFrame
 from Views.Frames.SelectionFrame import SelectionFrame
 from Views.Frames.MyListings import MyListings
 from Views.Frames.ListingsSearch import ListingsSearch
+from Views.Windows.ManageAccountTk import ManageAccountTk
 
 # main frame for MyListings and ListingsSearch
 # displays MyListings by default
@@ -64,3 +65,9 @@ class ListingsFrame(ttk.Frame):
             self.frame_listings_search.destroy()
             self.init_my_listings()
             self.my_listings_shown = True
+
+    def display_manage_account_tk(self):
+        """Displays the Manage Account window when called"""
+        # TopFrame ->
+        manage_account_tk = ManageAccountTk(self.master.get_current_account())
+        manage_account_tk.mainloop()

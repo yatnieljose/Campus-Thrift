@@ -1,7 +1,7 @@
 """Contains MainFrame class and Main function instantiated by the start of the application"""
 
 from tkinter import Tk, ttk
-import ct_tk
+import Views.Styling.ct_tk as ct_tk
 from Views.Windows.SignUpTk import SignUpTk
 from Views.Frames.LoginFrame import LoginFrame
 from Views.Frames.ListingsFrame import ListingsFrame
@@ -52,6 +52,9 @@ class MainFrame(ttk.Frame):
         self.frame_login = LoginFrame(self)
         self.frame_login.pack()
 
+    def get_current_account(self):
+        """Returns account information to populate"""
+        return(self.controller.get_current_account())
 
 def main():
     """Main function for this module"""
@@ -63,6 +66,5 @@ def main():
     ct_tk.CT_Tk(root, 'Campus Thrift')
     MainFrame(root, controller)
     root.mainloop()
-
 
 main()

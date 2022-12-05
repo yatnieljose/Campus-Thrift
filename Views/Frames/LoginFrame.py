@@ -1,7 +1,7 @@
 """Contains the LoginFrame class"""
 
 from tkinter import PhotoImage, messagebox, ttk
-import ct_frame
+import Views.Styling.ct_frame as ct_frame
 
 
 class LoginFrame(ttk.Frame):
@@ -12,6 +12,7 @@ class LoginFrame(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.master = master
         self.style = ttk.Style()
+
         self.style.configure("TFrame", background="#041E42")
         self.style.configure("TLabel", background="#041E42")
 
@@ -44,6 +45,7 @@ class LoginFrame(ttk.Frame):
             self.frame_content, width=24, font=('Arial', 10))
         self.entry_username.grid(row=4, column=1, padx=5, pady=5, sticky='w')
         self.entry_password.grid(row=4, column=2)
+        
 
     def try_login(self):
         """Checks credentials of attempted login, triggered by clicking the Submit button"""

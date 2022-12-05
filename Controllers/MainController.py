@@ -6,7 +6,7 @@ from Models.Account import Account
 from Controllers.AccountHandler import AccountHandler
 from Controllers.ItemHandler import ItemHandler
 from Controllers.TransactionHandler import TransactionHandler
-from Models.DbHandler import DbHandler
+from Models.DBHandler import DbHandler
 
 
 class MainController:
@@ -56,3 +56,7 @@ class MainController:
         """Resets this controller when account is unbinded"""
         messagebox.showinfo(title="reset",
                             message="reset")
+
+    def get_current_account(self):
+        """Returns account information"""
+        return(self.current_account)
