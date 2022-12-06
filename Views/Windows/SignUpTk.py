@@ -31,7 +31,7 @@ class SignUpTk(Tk):
         ttk.Label(self.frame_header, image=self.logo_photo).grid(
             row=0, column=2)
 
-        ttk.Label(self.frame_content, text='Full Name:').grid(
+        ttk.Label(self.frame_content, text='Username:').grid(
             row=1, column=2, pady=10, sticky='w')
         self.entry_name = ttk.Entry(
             self.frame_content, width=30, font=('Arial', 10))

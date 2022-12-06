@@ -71,3 +71,6 @@ class ListingsFrame(ttk.Frame):
         # TopFrame ->
         manage_account_tk = ManageAccountTk(self.master.get_current_account())
         manage_account_tk.mainloop()
+
+        if (manage_account_tk.logout == True):
+            self.destroy()
