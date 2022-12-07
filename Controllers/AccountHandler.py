@@ -37,8 +37,12 @@ class AccountHandler:
         """Checks for account with username and password. Populates account information if true, returns False
         if login attempt is unsuccessful"""
         # LoginFrame -> MainFrame -> MainController ->
-
-        return self.db_handler.check_username_pw_match(username, password)
+        pw_check, account_id = self.db_handler.check_username_pw_match(username, password)
+        
+        if (pw_check):
+            return account_id
+        else:
+            return None
 
     def get_account(self, account_id):
         """Gets all account information, creates an Account object and returns it"""
@@ -63,3 +67,8 @@ class AccountHandler:
         # Account ->
 
         return self.db_handler.get_receipts(account_id)
+
+    def update_pw(self, account_id, new_pw):
+        """Updates password in the database"""
+        # ManageAccountTk -> ListingsFrame -> main -> MainController -> 
+        self.db_handler.update_pw(account_id, new_pw)

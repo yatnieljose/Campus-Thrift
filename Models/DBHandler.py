@@ -63,7 +63,7 @@ class DbHandler:
         res = self.cursor.fetchone()
 
         # returns AccountId if it is found, else returns None
-        return (res[0])
+        return (res is not None, res[0])
 
     # untested
     def get_account_info(self, account_id):
@@ -77,7 +77,6 @@ class DbHandler:
                             """)
 
         res = self.cursor.fetchone()
-        print(res)
 
         account_info = {
             'name': res[0], 'email': res[1], 'password': res[2], 'bio': res[3], 'profile_picture': res[4],
@@ -125,3 +124,13 @@ class DbHandler:
                 receipts.append(receipt_id)
 
         return receipts
+
+    def update_pw(self, account_id, new_password):
+        """Updates password in the database on the current users account id"""
+        # ManageAccountTk -> ListingsFrame -> main -> MainController -> AccountHandler
+        self.cursor.execute(f"""
+                        UPDATE Accounts
+                        SET Password = "{new_password}"
+                        WHERE AccountId = "{account_id}"
+                        """
+        )

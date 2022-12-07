@@ -19,6 +19,7 @@ class ListingsFrame(ttk.Frame):
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
         self.my_listings_shown = True
+        self.logout_option = False
 
         self.init_top_frame()
         self.init_selection()
@@ -69,8 +70,13 @@ class ListingsFrame(ttk.Frame):
     def display_manage_account_tk(self):
         """Displays the Manage Account window when called"""
         # TopFrame ->
-        manage_account_tk = ManageAccountTk(self.master.get_current_account())
+        manage_account_tk = ManageAccountTk(self.master.get_current_account(), self)
         manage_account_tk.mainloop()
+        
+    def logout(self):
+        self.master.logout()
 
-        if (manage_account_tk.logout == True):
-            self.destroy()
+    def update_pw(self, new_pw):
+        # ManageAccountTk
+        """Updates password in the database"""
+        self.master.update_pw(new_pw)

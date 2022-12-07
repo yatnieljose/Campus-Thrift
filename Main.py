@@ -40,10 +40,11 @@ class MainFrame(ttk.Frame):
         self.frame_login.destroy()
         self.frame_listings_frame.pack()
 
-    def log_out(self):
+    def logout(self):
         """UI functionality instantiated by user log out"""
         # this will exist as a "Log Out" button in the Account-Settings window
         self.frame_listings_frame.destroy()
+        self.frame_listings_frame = ListingsFrame(self)
 
         # re-initialize controller
         self.controller.reset()
@@ -55,6 +56,11 @@ class MainFrame(ttk.Frame):
     def get_current_account(self):
         """Returns account information to populate"""
         return(self.controller.get_current_account())
+
+    def update_pw(self, new_pw):
+        """Updates password in the database"""
+        # ManageAccountTk -> ListingsFrame
+        self.controller.update_pw(new_pw)
 
 def main():
     """Main function for this module"""

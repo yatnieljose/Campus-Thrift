@@ -60,3 +60,8 @@ class MainController:
     def get_current_account(self):
         """Returns account information"""
         return(self.current_account)
+
+    def update_pw(self, new_pw):
+        """Updates password in the database"""
+        # ManageAccountTk - > ListingsFrame -> main
+        self.account_handler.update_pw(self.current_account.get_name, new_pw)
