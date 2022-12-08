@@ -7,7 +7,7 @@ class DbHandler:
     """Interface representing various functions directly interacting with the Campus Thrift database"""
 
     def __init__(self):
-        self.conn = sqlite3.connect('Models/CampusThrift.sqlite3')
+        self.conn = sqlite3.connect('Models/Campus-Thrift.sqlite3')
         self.cursor = self.conn.cursor()
 
     def username_exists(self, username):
@@ -63,7 +63,7 @@ class DbHandler:
         res = self.cursor.fetchone()
 
         # returns AccountId if it is found, else returns None
-        return (res is not None, res[0])
+        return None if res is None else res[0]
 
     # untested
     def get_account_info(self, account_id):
@@ -133,4 +133,4 @@ class DbHandler:
                         SET Password = "{new_password}"
                         WHERE AccountId = "{account_id}"
                         """
-        )
+                            )

@@ -45,10 +45,6 @@ class MainController:
         if (account_id is None):
             return False
         else:
-            # AccountHandler handles Accounts, sooooo it should return an Account object in my opinion
-            # MainController should handle AccountId and call AccountHandler any time it needs to use an account
-            # in the database. We will be working with so many accounts when making Listings, and I think
-            # this is the best way to encapsulate all of the information
             self.current_account = self.account_handler.get_account(account_id)
             return True
 
@@ -59,7 +55,7 @@ class MainController:
 
     def get_current_account(self):
         """Returns account information"""
-        return(self.current_account)
+        return (self.current_account)
 
     def update_pw(self, new_pw):
         """Updates password in the database"""

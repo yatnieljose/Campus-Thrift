@@ -11,8 +11,10 @@ CREATE TABLE [Items] (
 	[ItemId] INTEGER  PRIMARY KEY NOT NULL,
 	[SellerId] INTEGER NOT NULL,   
     [Name] NVARCHAR(50) NOT NULL,
-	[Price] INTEGER NOT NULL,
-    [TypeId] INTEGER NOT NULL
+    [TypeId] INTEGER NOT NULL,
+    [MinimumBid] INTEGER NOT NULL,
+    [HighestBid] INTEGER,
+    [BuyerId] INTEGER
 );     
 CREATE TABLE [Receipts] (  
     [ReceiptId] INTEGER NOT NULL PRIMARY KEY,

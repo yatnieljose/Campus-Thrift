@@ -49,7 +49,6 @@ class MainFrame(ttk.Frame):
         # re-initialize controller
         self.controller.reset()
 
-        # we may not need to make this initialization happen again, I just have not yet tested it
         self.frame_login = LoginFrame(self)
         self.frame_login.pack()
 
