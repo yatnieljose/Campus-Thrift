@@ -2,7 +2,7 @@
 
 from tkinter import Tk, PhotoImage, Text, messagebox, ttk, END
 import sys
-import ct_tk
+import Views.Styling.ct_tk as ct_tk
 sys.path.append('..')
 
 
@@ -31,7 +31,7 @@ class SignUpTk(Tk):
         ttk.Label(self.frame_header, image=self.logo_photo).grid(
             row=0, column=2)
 
-        ttk.Label(self.frame_content, text='Full Name:').grid(
+        ttk.Label(self.frame_content, text='Username:').grid(
             row=1, column=2, pady=10, sticky='w')
         self.entry_name = ttk.Entry(
             self.frame_content, width=30, font=('Arial', 10))
@@ -72,17 +72,13 @@ class SignUpTk(Tk):
                                    'password': self.entry_password.get(), 'bio': self.entry_bio.get("1.0", END)}
 
             self.controller.try_signup(signup_account_info)
+            self.destroy()
         else:
             self.entry_password.delete(0, len(self.entry_password.get()))
             self.entry_confirm_pw.delete(0, len(self.entry_confirm_pw.get()))
 
-        self.destroy()
-
-    def check_pw(self):
-        """Returns True if passwords match, False if not"""
-        return (self.entry_password.get() == self.entry_confirm_pw.get())
-
     # Untested -- validate_input()
+
     def validate_input(self):
         """Check user input to validate account fields"""
 

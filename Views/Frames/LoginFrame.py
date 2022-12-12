@@ -1,18 +1,26 @@
 """Contains the LoginFrame class"""
 
 from tkinter import PhotoImage, messagebox, ttk
+import Views.Styling.ct_frame as ct_frame
 
 
 class LoginFrame(ttk.Frame):
     """Represents a LoginFrame UI object"""
+    # MainFrame ->
 
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
         self.master = master
+        self.style = ttk.Style()
 
-        self.frame_header = ttk.Frame(self)
+        self.style.configure("TFrame", background="#041E42")
+        self.style.configure("TLabel", background="#041E42")
+
+        self.frame_header = ttk.Frame(self, style="TFrame")
+        # ct_frame.CT_Frame(self.frame_header)
         self.frame_header.pack()
-        self.frame_content = ttk.Frame(self)
+        self.frame_content = ttk.Frame(self, style="TFrame")
+        # ct_frame.CT_Frame(self.frame_content)
         self.frame_content.pack()
 
         self.lion_photo = PhotoImage(file='thriftanyLion.png')
@@ -37,9 +45,10 @@ class LoginFrame(ttk.Frame):
             self.frame_content, width=24, font=('Arial', 10))
         self.entry_username.grid(row=4, column=1, padx=5, pady=5, sticky='w')
         self.entry_password.grid(row=4, column=2)
+        
 
     def try_login(self):
-        """Checks credentials of attempted login"""
+        """Checks credentials of attempted login, triggered by clicking the Submit button"""
 
         # if database contains a username/password match, initiate login_successful functionality. Else,
         # clear the Entry widgets and show an error message

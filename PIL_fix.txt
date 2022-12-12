@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/51095449/pylint-false-positive-e0401-import-errors-in-vscode-while-using-venv
+https://stackoverflow.com/questions/71235912/python-import-pil-could-not-be-resolved-from-source-reportmissingmodulesour

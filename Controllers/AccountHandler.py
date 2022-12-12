@@ -1,6 +1,7 @@
 """Contains the AccountHandler class"""
 
 from tkinter import messagebox
+from Models.Account import Account
 
 
 class AccountHandler:
@@ -11,6 +12,8 @@ class AccountHandler:
 
     def try_signup(self, signup_account_info):
         """Attempts to create new account information based on given user input"""
+        # SignUpTk -> MainController ->
+
         # fields are validated before they are encountered in this function
 
         username = signup_account_info['name']
@@ -33,5 +36,37 @@ class AccountHandler:
     def try_login(self, username, password):
         """Checks for account with username and password. Populates account information if true, returns False
         if login attempt is unsuccessful"""
+        # LoginFrame -> MainFrame -> MainController ->
+        account_id = self.db_handler.check_username_pw_match(
+            username, password)
 
-        return self.db_handler.check_username_pw_match(username, password)
+        return account_id
+
+    def get_account(self, account_id):
+        """Gets all account information, creates an Account object and returns it"""
+        # MainController ->
+
+        account_info = self.db_handler.get_account_info(account_id)
+
+        name = account_info['name']
+        email = account_info['email']
+        password = account_info['password']
+        bio = account_info['bio']
+        profile_picture = account_info['profile_picture']
+        rank = account_info['rank']
+
+        account = Account(self, account_id, name, email, password,
+                          bio, profile_picture, rank)
+
+        return account
+
+    def get_receipts(self, account_id):
+        """Gets ReceiptID of all receipts associated with the input AccountId"""
+        # Account ->
+
+        return self.db_handler.get_receipts(account_id)
+
+    def update_pw(self, account_id, new_pw):
+        """Updates password in the database"""
+        # ManageAccountTk -> ListingsFrame -> main -> MainController ->
+        self.db_handler.update_pw(account_id, new_pw)
