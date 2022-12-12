@@ -85,6 +85,22 @@ class DbHandler:
 
         return (account_info)
 
+    def create_item(self, account_id, item_info):
+        """Stores information for a newly created item in database"""
+        # CreateListingTk -> MainController -> ItemHandler ->
+
+        name = item_info['name']
+        type = item_info['type']
+        min_bid = item_info['min_bid']
+
+        self.cursor.execute(f"""
+                            INSERT INTO Items
+                            (SellerId, Name, Type, MinimumBid)
+                            VALUES
+                            ("{account_id}", "{name}", "{type}", "{min_bid}")""")
+
+        self.conn.commit()
+
     # untested
     def get_receipts(self, account_id):
         """Retrieves all receipts based on input AccountId, and returns ReceiptId for each"""
@@ -96,7 +112,7 @@ class DbHandler:
         self.cursor.execute(f"""
                             SELECT ReceiptId
                             FROM Receipts
-                            WHERE BuyerId = "{account_id}"
+                            WHERE BuyerId="{account_id}"
                             """)
 
         res = self.cursor.fetchall()
@@ -109,7 +125,7 @@ class DbHandler:
         res = self.cursor.execute(f"""
                             SELECT ItemId
                             FROM Items
-                            WHERE SellerId = "{account_id}"
+                            WHERE SellerId="{account_id}"
                             """)
 
         # for each item, fetch ReceiptId and append
@@ -117,7 +133,7 @@ class DbHandler:
             receipt_ids = self.cursor.execute(f"""
                                               SELECT ReceiptId
                                               FROM Receipts
-                                              WHERE ItemId = "{item_id}"
+                                              WHERE ItemId="{item_id}"
                                               """)
 
             for receipt_id in receipt_ids:
@@ -130,7 +146,7 @@ class DbHandler:
         # ManageAccountTk -> ListingsFrame -> main -> MainController -> AccountHandler
         self.cursor.execute(f"""
                         UPDATE Accounts
-                        SET Password = "{new_password}"
-                        WHERE AccountId = "{account_id}"
+                        SET Password="{new_password}"
+                        WHERE AccountId="{account_id}"
                         """
                             )

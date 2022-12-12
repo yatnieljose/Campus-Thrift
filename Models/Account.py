@@ -18,6 +18,12 @@ class Account:
         self._num_completed = self.get_num_completed
 
     @property
+    def get_account_id(self):
+        """Returns ID associated with account"""
+
+        return (self._account_id)
+
+    @property
     def get_name(self):
         """Returns name associated with account"""
 

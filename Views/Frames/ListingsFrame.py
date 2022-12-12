@@ -5,7 +5,6 @@ from Views.Frames.TopFrame import TopFrame
 from Views.Frames.SelectionFrame import SelectionFrame
 from Views.Frames.MyListings import MyListings
 from Views.Frames.ListingsSearch import ListingsSearch
-from Views.Windows.ManageAccountTk import ManageAccountTk
 
 # main frame for MyListings and ListingsSearch
 # displays MyListings by default
@@ -14,7 +13,7 @@ from Views.Windows.ManageAccountTk import ManageAccountTk
 
 class ListingsFrame(ttk.Frame):
     """Represents a ListingFrame UI object"""
-    #Main -> MainFrame
+    # Main -> MainFrame
 
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
@@ -49,7 +48,6 @@ class ListingsFrame(ttk.Frame):
         self.frame_listings_search = ListingsSearch(self)
         self.frame_listings_search.pack(side=TOP, pady=10, padx=10)
 
-    # we can call this from MyListings
     def show_listings_search(self):
         """Shows the ListingsSearch UI object"""
         # performed when "Search Listings" button is pressed inside of MyListings
@@ -58,7 +56,6 @@ class ListingsFrame(ttk.Frame):
             self.init_listings_search()
             self.my_listings_shown = False
 
-    # we can call this from ListingsSearch
     def show_my_listings(self):
         """Shows the MyListings UI object"""
         # performed when "Show My Listings" button is pressed inside of ListingsSearch
@@ -70,13 +67,14 @@ class ListingsFrame(ttk.Frame):
     def display_manage_account_tk(self):
         """Displays the Manage Account window when called"""
         # TopFrame ->
-        manage_account_tk = ManageAccountTk(self.master.get_current_account(), self)
-        manage_account_tk.mainloop()
-        
+
+        self.master.display_manage_account_tk()
+
     def logout(self):
         self.master.logout()
 
-    def update_pw(self, new_pw):
-        # ManageAccountTk
-        """Updates password in the database"""
-        self.master.update_pw(new_pw)
+    def display_create_listing_tk(self):
+        """Calls this method in MainFrame to create a CreateListingTk popup window"""
+        # MyListings ->
+
+        self.master.display_create_listing_tk()

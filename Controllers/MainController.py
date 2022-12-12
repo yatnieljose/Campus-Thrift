@@ -61,3 +61,10 @@ class MainController:
         """Updates password in the database"""
         # ManageAccountTk - > ListingsFrame -> main
         self.account_handler.update_pw(self.current_account.get_name, new_pw)
+
+    def create_item(self, item_info):
+        """Passes along information about a created item to ItemHandler"""
+        # CreateListingTk ->
+
+        self.item_handler.create_item(
+            self.current_account.get_account_id, item_info)

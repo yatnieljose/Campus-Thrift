@@ -6,6 +6,8 @@ from Views.Windows.SignUpTk import SignUpTk
 from Views.Frames.LoginFrame import LoginFrame
 from Views.Frames.ListingsFrame import ListingsFrame
 from Controllers.MainController import MainController
+from Views.Windows.ManageAccountTk import ManageAccountTk
+from Views.Windows.CreateListingTk import CreateListingTk
 
 
 class MainFrame(ttk.Frame):
@@ -15,7 +17,6 @@ class MainFrame(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.controller = controller
         self.pack()
-        self.controller.account = None
 
         # we must create all component in the constructor
         self.frame_login = LoginFrame(self)
@@ -54,12 +55,28 @@ class MainFrame(ttk.Frame):
 
     def get_current_account(self):
         """Returns account information to populate"""
-        return(self.controller.get_current_account())
+        return (self.controller.get_current_account())
+
+    def display_manage_account_tk(self):
+        """Creates a ManageAccountTk object and displays it"""
+        # TopFrame -> ListingsFrame ->
+
+        manage_account_tk = ManageAccountTk(
+            self.controller, self)
+        manage_account_tk.mainloop()
 
     def update_pw(self, new_pw):
         """Updates password in the database"""
         # ManageAccountTk -> ListingsFrame
         self.controller.update_pw(new_pw)
+
+    def display_create_listing_tk(self):
+        """Creates a CreateListingTk object and displays it"""
+        # MyListings -> ListingsFrame ->
+
+        create_listing_tk = CreateListingTk(self.controller, self)
+        create_listing_tk.mainloop()
+
 
 def main():
     """Main function for this module"""
@@ -71,5 +88,6 @@ def main():
     ct_tk.CT_Tk(root, 'Campus Thrift')
     MainFrame(root, controller)
     root.mainloop()
+
 
 main()
