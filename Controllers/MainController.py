@@ -68,3 +68,12 @@ class MainController:
 
         self.item_handler.create_item(
             self.current_account.get_account_id, item_info)
+
+    def get_users_items(self):
+        """Gets the current users items to display in the window"""
+        # MyListings -> ListingsFrame -> MainFrame -> 
+        user_items = self.item_handler.get_items(self.current_account)
+        listing_info = []
+        for item in user_items:
+            listing_info.append([item.get_name, item.get_type, item.get_minimum_bid])
+        return listing_info

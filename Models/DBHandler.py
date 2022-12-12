@@ -101,6 +101,20 @@ class DbHandler:
 
         self.conn.commit()
 
+    def get_items(self, account_id):
+        """Gets items from the specified account"""
+        # MyListings -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
+        self.cursor.execute(f"""
+                            SELECT ItemId, SellerId, Name, Type, MinimumBid, HighestBid, BuyerId
+                            FROM Items
+                            WHERE SellerId="{account_id.get_account_id}"
+                            """)
+        
+        res = self.cursor.fetchall()
+        print("DBHandler:")
+        print(res)
+        return(res)
+
     # untested
     def get_receipts(self, account_id):
         """Retrieves all receipts based on input AccountId, and returns ReceiptId for each"""

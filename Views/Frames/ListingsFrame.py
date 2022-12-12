@@ -70,6 +70,12 @@ class ListingsFrame(ttk.Frame):
 
         self.master.display_manage_account_tk()
 
+    def display_users_listings(self):
+        """Displays the listings of the current user"""
+        # MyListings ->
+        items = self.master.get_users_items()
+        return items
+
     def logout(self):
         self.master.logout()
 

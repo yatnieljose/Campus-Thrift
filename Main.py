@@ -20,7 +20,6 @@ class MainFrame(ttk.Frame):
 
         # we must create all component in the constructor
         self.frame_login = LoginFrame(self)
-        self.frame_listings_frame = ListingsFrame(self)
 
         # pack the LoginFrame we start the application with
         self.frame_login.pack()
@@ -38,6 +37,7 @@ class MainFrame(ttk.Frame):
 
     def login_successful(self):
         """UI functionality instantiated by a successful login"""
+        self.frame_listings_frame = ListingsFrame(self)
         self.frame_login.destroy()
         self.frame_listings_frame.pack()
 
@@ -56,6 +56,12 @@ class MainFrame(ttk.Frame):
     def get_current_account(self):
         """Returns account information to populate"""
         return (self.controller.get_current_account())
+
+    def get_users_items(self):
+        """Gets the current users items to display in the window"""
+        # MyListings -> ListingsFrame -> 
+        items = self.controller.get_users_items()
+        return items
 
     def display_manage_account_tk(self):
         """Creates a ManageAccountTk object and displays it"""
