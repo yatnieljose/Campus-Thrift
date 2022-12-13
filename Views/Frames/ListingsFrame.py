@@ -76,6 +76,12 @@ class ListingsFrame(ttk.Frame):
         items = self.master.get_users_items()
         return items
 
+    def display_item_listings(self):
+        """Displays the listings of items available for sale"""
+        # ListingsSearch ->
+        items = self.master.get_item_listings()
+        return items
+
     def logout(self):
         self.master.logout()
 
@@ -84,3 +90,9 @@ class ListingsFrame(ttk.Frame):
         # MyListings ->
 
         self.master.display_create_listing_tk()
+
+    def get_rank(self):
+        return self.master.get_rank()
+
+    def get_completed_transactions(self):
+        return self.master.get_completed_transactions()

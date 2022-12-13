@@ -5,7 +5,9 @@
 # conducted)
 
 from tkinter import ttk, GROOVE
+from Views.Components.BuyListing import BuyListing
 
+RIDGE_PAD = 2
 
 class ListingsSearch(ttk.Frame):
     """Represents a ListingsSearch UI object"""
@@ -24,3 +26,13 @@ class ListingsSearch(ttk.Frame):
             master=self, width=1400, height=550, relief=GROOVE)
         self.frm_container.grid(sticky="ns")
         self.frm_container.pack_propagate(0)
+
+        self.display_item_listings(self.frm_container)
+
+    def display_item_listings(self, container):
+        """Displays the listings of items available for sale"""
+        items = self.master.display_item_listings()
+        for i in range(len(items)):
+            listing = BuyListing(container)
+            listing.place(x=RIDGE_PAD, y=RIDGE_PAD+(i*55))
+            listing.fill_labels(items[i][0], items[i][1], items[i][2])

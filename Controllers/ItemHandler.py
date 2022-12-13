@@ -13,10 +13,11 @@ class ItemHandler:
 
         self.db_handler.create_item(account_id, item_info)
 
-    def get_items(self, account_id):
+    def get_items(self, account_id, seller):
         """Gets items from the specified account"""
         # MyListings -> ListingsFrame -> MainFrame -> MainController ->
-        res = self.db_handler.get_items(account_id)
+        # seller argument is a boolean value to signify the user's role when querying
+        res = self.db_handler.get_items(account_id, seller)
         item_list = []
         for item in res:
             item_list.append(Item(item[0], item[1], item[2], item[3], item[4], item[5], item[6]))

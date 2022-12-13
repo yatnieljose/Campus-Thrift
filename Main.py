@@ -63,12 +63,17 @@ class MainFrame(ttk.Frame):
         items = self.controller.get_users_items()
         return items
 
+    def get_item_listings(self):
+        """Gets the listings of items available for sale"""
+        # ListingsSearch -> ListingsFrame ->
+        items = self.controller.get_item_listings()
+        return items
+
     def display_manage_account_tk(self):
         """Creates a ManageAccountTk object and displays it"""
         # TopFrame -> ListingsFrame ->
 
-        manage_account_tk = ManageAccountTk(
-            self.controller, self)
+        manage_account_tk = ManageAccountTk(self.controller, self)
         manage_account_tk.mainloop()
 
     def update_pw(self, new_pw):
@@ -83,6 +88,11 @@ class MainFrame(ttk.Frame):
         create_listing_tk = CreateListingTk(self.controller, self)
         create_listing_tk.mainloop()
 
+    def get_rank(self):
+        return self.controller.current_account.get_rank
+
+    def get_completed_transactions(self):
+        return self.controller.current_account.get_num_completed
 
 def main():
     """Main function for this module"""

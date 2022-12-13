@@ -60,7 +60,7 @@ class MainController:
     def update_pw(self, new_pw):
         """Updates password in the database"""
         # ManageAccountTk - > ListingsFrame -> main
-        self.account_handler.update_pw(self.current_account.get_name, new_pw)
+        self.account_handler.update_pw(self.current_account.get_account_id, new_pw)
 
     def create_item(self, item_info):
         """Passes along information about a created item to ItemHandler"""
@@ -72,8 +72,17 @@ class MainController:
     def get_users_items(self):
         """Gets the current users items to display in the window"""
         # MyListings -> ListingsFrame -> MainFrame -> 
-        user_items = self.item_handler.get_items(self.current_account)
+        user_items = self.item_handler.get_items(self.current_account, True)
         listing_info = []
         for item in user_items:
+            listing_info.append([item.get_name, item.get_type, item.get_minimum_bid])
+        return listing_info
+
+    def get_item_listings(self):
+        """Gets the listings of items available for sale"""
+        # ListingsSearch -> ListingsFrame -> MainFrame ->
+        available_items = self.item_handler.get_items(self.current_account, False)
+        listing_info = []
+        for item in available_items:
             listing_info.append([item.get_name, item.get_type, item.get_minimum_bid])
         return listing_info

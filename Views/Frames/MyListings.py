@@ -46,6 +46,7 @@ class MyListings(ttk.Frame):
         #return self.master.display_create_listing_tk()
 
     def display_users_listings(self, container):
+        """Displays the current user's item listings"""
         items = self.master.display_users_listings()
         for i in range(len(items)):
             self.frame_sell_listings.place(x=RIDGE_PAD, y=55*(i+1)+RIDGE_PAD)

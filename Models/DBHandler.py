@@ -101,18 +101,24 @@ class DbHandler:
 
         self.conn.commit()
 
-    def get_items(self, account_id):
+    def get_items(self, account_id, seller):
         """Gets items from the specified account"""
         # MyListings -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
-        self.cursor.execute(f"""
-                            SELECT ItemId, SellerId, Name, Type, MinimumBid, HighestBid, BuyerId
+        # SearchListings -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
+        if (seller):
+            self.cursor.execute(f"""
+                            SELECT *
                             FROM Items
                             WHERE SellerId="{account_id.get_account_id}"
                             """)
+        else:
+            self.cursor.execute(f"""
+                            SELECT *
+                            FROM Items
+                            WHERE NOT SellerId="{account_id.get_account_id}"
+                            """)#ItemId, SellerId, Name, Type, MinimumBid, HighestBid, BuyerId
         
         res = self.cursor.fetchall()
-        print("DBHandler:")
-        print(res)
         return(res)
 
     # untested

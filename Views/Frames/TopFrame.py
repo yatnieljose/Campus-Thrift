@@ -51,9 +51,9 @@ class TopFrame(ttk.Frame):
         # Rank and Transactions (we will need data to populate rank and transaction within "text" attribute of each Label)
         self.frm_rank = ttk.Frame(
             master=self, height=self.height, width=200)
-        self.lbl_rank = ttk.Label(master=self.frm_rank, text=f"Rank : ")
+        self.lbl_rank = ttk.Label(master=self.frm_rank, text=f"Rank : " + str(self.master.get_rank()))
         self.lbl_completed_trans = ttk.Label(
-            master=self.frm_rank, text=f"Completed Transactions : ")
+            master=self.frm_rank, text=f"Completed Transactions : " + str(self.master.get_completed_transactions()))
 
         self.lbl_rank.pack(side=TOP)
         self.lbl_completed_trans.pack(side=TOP)

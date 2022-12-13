@@ -34,27 +34,24 @@ class ManageAccountTk(Tk):
         ttk.Label(self.frame_content, text=self.username).grid(row=0, column=1)
         # label_username = .configure(style="TLabel")
         # label_username
-        self.username_entry = ttk.Entry(
-            self.frame_content, textvariable="username")
-        ttk.Label(self.frame_content, text=self.email).grid(
-            row=2, column=1)
+        self.username_entry = ttk.Entry(self.frame_content, textvariable="username")
+        ttk.Label(self.frame_content, text=self.email).grid(row=2, column=1)
         self.email_entry = ttk.Entry(self.frame_content, textvariable="email")
-        ttk.Label(self.frame_content, text=self.password).grid(
-            row=4, column=1)
+        ttk.Label(self.frame_content, text=self.password).grid(row=4, column=1)
         self.bio_entry = ttk.Entry(self.frame_content, textvariable="bio")
-        ttk.Label(self.frame_content, text=self.bio).grid(
-            row=6, column=1)
+        ttk.Label(self.frame_content, text=self.bio).grid(row=6, column=1)
 
-        self.btn_change_password = ttk.Button(self.frame_content, text="Change Password", command=self.change_password).grid(
-            row=11, column=0)
+        self.btn_change_password = ttk.Frame(master=self.frame_content)
+        self.btn_change_password.grid(row=11, column=0)
+        ttk.Button(self.btn_change_password, text="Change Password", command=self.change_password).pack()
+
         self.lbl_new_password = None
         self.entry_new_password = None
         self.lbl_confirm_pw = None
         self.entry_confirm_pw = None
         self.btn_save_pw = None
 
-        ttk.Button(self.frame_content, text="Logout",
-                   command=self.logout).grid(row=11, column=2)
+        ttk.Button(self.frame_content, text="Logout", command=self.logout).grid(row=11, column=2)
 
         self.frame_header.pack()
         self.frame_content.pack()
@@ -66,17 +63,20 @@ class ManageAccountTk(Tk):
 
     def change_password(self):
         """Allows the user their change password and/or bio"""
-        self.lbl_new_password = ttk.Label(
-            self.frame_content, text="New Password").grid(row=7, column=1)
-        self.entry_new_password = ttk.Entry(self.frame_content, width=30, font=(
-            "Arial", 10), show="*").grid(row=8, column=1)
-        self.lbl_confirm_pw = ttk.Label(
-            self.frame_content, text="Confirm Password").grid(row=9, column=1)
-        self.entry_confirm_pw = ttk.Entry(self.frame_content, width=30, font=(
-            "Arial", 10), show="*").grid(row=10, column=1)
-        self.btn_save_pw = ttk.Button(
-            self.frame_content, text="Save", command=self.save_password).grid(row=11, column=0)
         self.btn_change_password.destroy()
+        self.btn_change_password = ttk.Frame(master=self.frame_content)
+        self.btn_change_password.grid(row=11, column=0)
+        ttk.Button(self.btn_change_password, text="Save", command=self.save_password).pack()
+
+        self.lbl_new_password = ttk.Label(self.frame_content, text="New Password")
+        self.entry_new_password = ttk.Entry(self.frame_content, width=30, font=("Arial", 10), show="*")
+        self.lbl_confirm_pw = ttk.Label(self.frame_content, text="Confirm Password")
+        self.entry_confirm_pw = ttk.Entry(self.frame_content, width=30, font=("Arial", 10), show="*")
+        
+        self.lbl_new_password.grid(row=7, column=1)
+        self.entry_new_password.grid(row=8, column=1)
+        self.lbl_confirm_pw.grid(row=9, column=1)
+        self.entry_confirm_pw.grid(row=10, column=1)
 
     def save_password(self):
         """Saves new password to the database"""
@@ -86,12 +86,16 @@ class ManageAccountTk(Tk):
         if (new_pw == confirm_pw):
             self.traceback.update_pw(new_pw)
             self.lbl_new_password.destroy()
+            self.entry_new_password.destroy()
             self.lbl_confirm_pw.destroy()
-            self.btn_save_pw.destroy()
-            self.btn_change_password = ttk.Button(self.frame_content, text="Change Password", command=self.change_password).grid(
-                row=11, column=0)
+            self.entry_confirm_pw.destroy()
+
+            self.btn_change_password = ttk.Frame(master=self.frame_content)
+
+            self.btn_change_password.grid(row=11, column=0)
+            ttk.Button(self.btn_change_password, text="Change Password", command=self.change_password).pack()
         else:
-            self.new_password.delete(0, len(self.new_password.get()))
-            self.confirm_pw.delete(0, len(self.confirm_pw.get()))
+            self.entry_new_password.delete(0, len(self.entry_new_password.get()))
+            self.entry_confirm_pw.delete(0, len(self.entry_confirm_pw.get()))
             messagebox.showinfo(title="Password Mismatch",
                                 message="Passwords do not match")
