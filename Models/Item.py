@@ -25,7 +25,6 @@ class Item:
     def get_name(self):
         return self._name
 
-    @get_name.setter
     def set_name(self, new_name):
         self._name = new_name
 
@@ -33,7 +32,6 @@ class Item:
     def get_type(self):
         return self._type
 
-    @get_type.setter
     def set_type(self, new_type):
         self._type = new_type
 
@@ -41,7 +39,6 @@ class Item:
     def get_minimum_bid(self):
         return self._minimum_bid
 
-    @get_minimum_bid.setter
     def set_minimum_bid(self, new_min_bid):
         self._minimum_bid = new_min_bid
 
@@ -49,7 +46,6 @@ class Item:
     def get_highest_bid(self):
         return self._highest_bid
 
-    @get_highest_bid.setter
     def set_highest_bid(self, new_high_bid):
         self._highest_bid = new_high_bid
 
@@ -57,6 +53,5 @@ class Item:
     def get_buyer_id(self):
         return self._buyer_id
 
-    @get_buyer_id.setter
     def set_buyer_id(self, new_buyer_id):
         self._buyer_id = new_buyer_id

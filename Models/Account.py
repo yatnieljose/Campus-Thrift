@@ -29,7 +29,6 @@ class Account:
 
         return (self._name)
 
-    @get_name.setter
     def set_name(self, new_name):
         self._name = new_name
 
@@ -39,7 +38,6 @@ class Account:
 
         return (self._email)
 
-    @get_email.setter
     def set_email(self, new_email):
         self._email = new_email
 
@@ -49,7 +47,6 @@ class Account:
 
         return (self._password)
 
-    @get_password.setter
     def set_password(self, new_password):
         self._password = new_password
 
@@ -59,7 +56,6 @@ class Account:
 
         return (self._bio)
 
-    @get_bio.setter
     def set_bio(self, new_bio):
         self._bio = new_bio
 

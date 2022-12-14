@@ -1,5 +1,6 @@
 """Contains the SignUpTk class"""
 
+import Models.Validator as Validator
 from tkinter import Tk, PhotoImage, Text, messagebox, ttk, END
 import sys
 import Views.Styling.ct_tk as ct_tk
@@ -82,105 +83,9 @@ class SignUpTk(Tk):
     def validate_input(self):
         """Check user input to validate account fields"""
 
-        # check username integrity (6-16 characters)
-        if len(self.entry_name.get()) < 6:
-            messagebox.showinfo(title='UsernameTooShort',
-                                message="Username is too short. Username must be between 6 and 16 characters.")
-            return False
-
-        if len(self.entry_name.get()) > 16:
-            messagebox.showinfo(title="UsernameTooLong",
-                                message="Username is too long. Username must be between 6 and 16 characters.")
-            return False
-
-        # check email integrity (conforms to acceptable email format)
-
-        # split into prefix and domain, separated by @
-        # check if more than one @
-        email_split = self.entry_email.get().split("@")
-        if len(email_split) != 2:
-            self.email_failure_message()
-            return False
-        email_prefix = email_split[0]
-        email_domain = email_split[1]
-
-        # validate prefix by name length and type of characters allowed
-        if not (1 <= len(email_prefix) <= 256):
-            self.email_failure_message()
-            return False
-
-        # validate prefix ends with alphanumeric character
-        if not email_prefix[-1].isalnum():
-            self.email_failure_message()
-            return False
-
-        # validate every character in prefix is alphanumeric, underscore (_), period(.), or dash(-)
-        for c in email_prefix:
-            if not (c.isalnum() or c == '_' or c == '.' or c == '-'):
-                self.email_failure_message()
-                return False
-
-        # split domain by .
-        domain_split = email_domain.split(".")
-        if (len(domain_split) != 2):
-            self.email_failure_message()
-            return False
-        domain_prefix = domain_split[0]
-        domain_suffix = domain_split[1]
-
-        # validate domain prefix
-        if not (1 <= len(domain_prefix) <= 64):
-            self.email_failure_message()
-            return False
-
-        if not domain_prefix[-1].isalnum():
-            self.email_failure_message()
-            return False
-
-        for c in domain_prefix:
-            if not (c.isalnum() or c == "-"):
-                self.email_failure_message()
-                return False
-
-        # validate domain suffix
-        if not (1 <= len(domain_suffix) <= 64):
-            self.email_failure_message()
-            return False
-
-        if not domain_suffix[-1].isalnum():
-            self.email_failure_message()
-            return False
-
-        for c in domain_suffix:
-            if not (c.isalnum() or c == "-"):
-                self.email_failure_message()
-                return False
-
-        # check password integrity
-        if len(self.entry_password.get()) < 6:
-            messagebox.showinfo(title="WrongPasswordFormat",
-                                message="Password must be at least 6 characters.")
-            return False
-
-        if len(self.entry_password.get()) > 64:
-            messagebox.showinfo(title="LongPasswordFormat",
-                                message="Password must be 64 characters maximum.")
-
-        # check password match
-        if self.entry_password.get() != self.entry_confirm_pw.get():
-            messagebox.showinfo(title="PasswordMismatchFormat",
-                                message="Passwords do not match.")
-            return False
-
-         # check bio integrity (max 256 but no minimum, can be left blank)
-         # !!! We need .get() but for a Text widget
-        if len(self.entry_bio.get("1.0", "end-1c")) > 256:
-            messagebox.showinfo(title="LongBioFormat",
-                                message="Bio must be 256 characters maximum.")
-
-        return True
-
-    def email_failure_message(self):
-        """Displays a message box indicating that the email format is incorrect"""
-        messagebox.showinfo(title="WrongEmailFormat",
-                            message="Email format incorrect.")
+        return (
+            Validator.validate_name(self.entry_name.get()) and
+            Validator.validate_email(self.entry_email.get()) and
+            Validator.validate_password(self.entry_password.get(), self.entry_confirm_pw.get()) and
+            Validator.validate_bio(self.entry_bio.get("1.0", "end-1c"))
+        )

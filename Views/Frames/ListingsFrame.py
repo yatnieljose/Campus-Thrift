@@ -70,15 +70,15 @@ class ListingsFrame(ttk.Frame):
 
         self.master.display_manage_account_tk()
 
-    def display_users_listings(self):
+    def display_my_listings(self, seller):
         """Displays the listings of the current user"""
         # MyListings ->
-        return self.master.get_users_items()
+        return self.master.get_items(seller)
 
-    def display_item_listings(self):
+    def display_all_listings(self):
         """Displays the listings of items available for sale"""
         # ListingsSearch ->
-        return self.master.get_item_listings()
+        return self.master.get_all_items()
 
     def refresh_sell_listings(self):
         """Refreshes sell listings after a new item is created by the user. Can only be called when 
@@ -101,3 +101,9 @@ class ListingsFrame(ttk.Frame):
 
     def get_completed_transactions(self):
         return self.master.get_completed_transactions()
+
+    def set_highest_bid(self, item_id, offer):
+        """Requests an update to the highest bid on specified item"""
+        # GenericListing -> ListingsSearch ->
+
+        self.master.set_highest_bid(item_id, offer)

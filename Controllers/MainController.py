@@ -57,10 +57,39 @@ class MainController:
         """Returns account information"""
         return (self.current_account)
 
+    def update_username(self, new_username):
+        """Updates username in the database"""
+        # ManageAccountTk ->
+
+        self.account_handler.update_username(
+            self.current_account.get_account_id, new_username)
+        self.current_account.set_name(new_username)
+
+    def update_email(self, new_email):
+        """Updates email in the database"""
+        # ManageAccountTk ->
+
+        self.account_handler.update_email(
+            self.current_account.get_account_id, new_email)
+        self.current_account.set_email(new_email)
+
+    def update_bio(self, new_bio):
+        """Updates bio in the database"""
+        # ManageAccountTk ->
+
+        self.account_handler.update_bio(
+            self.current_account.get_account_id, new_bio)
+        self.current_account.set_bio(new_bio)
+
     def update_pw(self, new_pw):
         """Updates password in the database"""
-        # ManageAccountTk - > ListingsFrame -> main
-        self.account_handler.update_pw(self.current_account.get_account_id, new_pw)
+        # ManageAccountTk ->
+
+        print("in update_pw() of MainController")
+
+        self.account_handler.update_pw(
+            self.current_account.get_account_id, new_pw)
+        self.current_account.set_password(new_pw)
 
     def create_item(self, item_info):
         """Passes along information about a created item to ItemHandler"""
@@ -69,20 +98,19 @@ class MainController:
         self.item_handler.create_item(
             self.current_account.get_account_id, item_info)
 
-    def get_users_items(self):
+    def get_items(self, seller):
         """Gets the current users items to display in the window"""
-        # MyListings -> ListingsFrame -> MainFrame -> 
-        user_items = self.item_handler.get_items(self.current_account, True)
-        listing_info = []
-        for item in user_items:
-            listing_info.append([item.get_name, item.get_type, item.get_minimum_bid])
-        return listing_info
+        # MyListings -> ListingsFrame -> MainFrame ->
+        return self.item_handler.get_items(self.current_account.get_account_id, seller)
 
-    def get_item_listings(self):
+    def get_all_items(self):
         """Gets the listings of items available for sale"""
         # ListingsSearch -> ListingsFrame -> MainFrame ->
-        available_items = self.item_handler.get_items(self.current_account, False)
-        listing_info = []
-        for item in available_items:
-            listing_info.append([item.get_name, item.get_type, item.get_minimum_bid])
-        return listing_info
+
+        return self.item_handler.get_all_items(self.current_account.get_account_id)
+
+    def set_highest_bid(self, item_id, offer):
+        """Requests an update to the highest bid on a specified item"""
+        # GenericListing -> ListingsSearch -> ListingsFrame -> MainFrame -> 
+
+        self.item_handler.set_highest_bid(self.current_account.get_account_id, item_id, offer)

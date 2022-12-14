@@ -57,17 +57,16 @@ class MainFrame(ttk.Frame):
         """Returns account information to populate"""
         return (self.controller.get_current_account())
 
-    def get_users_items(self):
+    def get_items(self, seller):
         """Gets the current users items to display in the window"""
         # MyListings -> ListingsFrame ->
-        items = self.controller.get_users_items()
+        items = self.controller.get_items(seller)
         return items
 
-    def get_item_listings(self):
+    def get_all_items(self):
         """Gets the listings of items available for sale"""
         # ListingsSearch -> ListingsFrame ->
-        items = self.controller.get_item_listings()
-        return items
+        return self.controller.get_all_items()
 
     def display_manage_account_tk(self):
         """Creates a ManageAccountTk object and displays it"""
@@ -75,11 +74,6 @@ class MainFrame(ttk.Frame):
 
         manage_account_tk = ManageAccountTk(self.controller, self)
         manage_account_tk.mainloop()
-
-    def update_pw(self, new_pw):
-        """Updates password in the database"""
-        # ManageAccountTk -> ListingsFrame
-        self.controller.update_pw(new_pw)
 
     def display_create_listing_tk(self):
         """Creates a CreateListingTk object and displays it"""
@@ -99,6 +93,12 @@ class MainFrame(ttk.Frame):
 
     def get_completed_transactions(self):
         return self.controller.current_account.get_num_completed
+
+    def set_highest_bid(self, item_id, offer):
+        """Requests an update of the highest bid"""
+        # GenericListing -> ListingsSearch -> ListingsFrame ->
+
+        self.controller.set_highest_bid(item_id, offer)
 
 
 def main():

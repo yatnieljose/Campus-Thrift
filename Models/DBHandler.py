@@ -101,26 +101,52 @@ class DbHandler:
 
         self.conn.commit()
 
+    # this returns either SellListings or BuyListings you have the highest offer on
     def get_items(self, account_id, seller):
         """Gets items from the specified account"""
         # MyListings -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
-        # SearchListings -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
         if (seller):
             self.cursor.execute(f"""
                             SELECT *
                             FROM Items
-                            WHERE SellerId="{account_id.get_account_id}"
+                            WHERE SellerId="{account_id}"
                             """)
         else:
             self.cursor.execute(f"""
                             SELECT *
                             FROM Items
-                            WHERE NOT SellerId="{account_id.get_account_id}"
-                            """)#ItemId, SellerId, Name, Type, MinimumBid, HighestBid, BuyerId
-        
-        res = self.cursor.fetchall()
-        return(res)
+                            WHERE BuyerId="{account_id}"
+                            """)  # ItemId, SellerId, Name, Type, MinimumBid, HighestBid, BuyerId
 
+        res = self.cursor.fetchall()
+        return (res)
+
+    def get_all_items(self, account_id):
+        """Gets all items that the current account is not the seller of"""
+        # ListingsSearch -> ListingsFrame -> MainFrame -> MainController -> ItemHandler ->
+
+        self.cursor.execute(f"""
+                            SELECT *
+                            FROM Items
+                            WHERE NOT SellerId="{account_id}"
+                            """)
+
+        res = self.cursor.fetchall()
+        return (res)
+
+    def set_highest_bid(self, account_id, item_id, offer):
+        """Updates the database to reflect a change in the highest bid"""
+
+        self.cursor.execute(f"""
+                            UPDATE Items
+                            SET BuyerId = "{account_id}",
+                                HighestBid = "{offer}"
+                            WHERE ItemId = "{item_id}"
+                            """)
+
+        self.conn.commit()
+
+        
     # untested
     def get_receipts(self, account_id):
         """Retrieves all receipts based on input AccountId, and returns ReceiptId for each"""
@@ -161,12 +187,54 @@ class DbHandler:
 
         return receipts
 
-    def update_pw(self, account_id, new_password):
-        """Updates password in the database on the current users account id"""
-        # ManageAccountTk -> ListingsFrame -> main -> MainController -> AccountHandler
+    def update_username(self, account_id, new_username):
+        """Updates username in the database on the current user's account id"""
+        # ManageAccountTk -> MainController -> AccountHandler ->
+
         self.cursor.execute(f"""
                         UPDATE Accounts
-                        SET Password="{new_password}"
+                        SET Name="{new_username}"
                         WHERE AccountId="{account_id}"
                         """
                             )
+
+        self.conn.commit()
+
+    def update_email(self, account_id, new_email):
+        """Updates email in the database on current user's account id"""
+        # ManageAccountTk -> MainController -> AccountHandler ->
+
+        self.cursor.execute(f"""
+                        UPDATE Accounts
+                        SET Email="{new_email}"
+                        WHERE AccountId="{account_id}"
+                        """
+                            )
+
+        self.conn.commit()
+
+    def update_bio(self, account_id, new_bio):
+        """Updates bio in the database on current user's account id"""
+        # ManageAccountTk -> MainController -> AccountHandler ->
+
+        self.cursor.execute(f"""
+                        UPDATE Accounts
+                        SET Bio="{new_bio}"
+                        WHERE AccountId="{account_id}"
+                        """
+                            )
+
+        self.conn.commit()
+
+    def update_pw(self, account_id, new_pw):
+        """Updates password in the database on the current users account id"""
+        # ManageAccountTk -> MainController -> AccountHandler ->
+
+        self.cursor.execute(f"""
+                        UPDATE Accounts
+                        SET Password="{new_pw}"
+                        WHERE AccountId="{account_id}"
+                        """
+                            )
+
+        self.conn.commit()

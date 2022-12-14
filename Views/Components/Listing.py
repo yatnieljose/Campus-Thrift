@@ -1,39 +1,58 @@
 from tkinter import *
 from tkinter import ttk
-import Views.Styling.ct_tk as ct_tk
+from Models.Item import Item
 
 
 class Listing(ttk.Frame):
     """Represents a Listing UI object"""
 
-    def __init__(self, master, name, price, type):
-        ttk.Frame.__init__(self, master)
+    def __init__(self, master, traceback, item):
+        ttk.Frame.__init__(self, master, relief=RIDGE)
 
-        self.name = name
-        self.price = price
-        self.type = type
+        self.master = master
+        self.traceback = traceback
+        self.item = item
+
+        for i in range(6):
+            self.columnconfigure(i, weight=1, minsize=125)
+
+        self.seller_id = self.item.get_seller_id
+        self.name = self.item.get_name
+        self.type = self.item.get_type
+        self.min_bid = self.item.get_minimum_bid
+        self.highest_bid = self.item.get_highest_bid if self.item.get_highest_bid is not None else 0
+        self.buyer_id = self.item.get_buyer_id
+
+        self.frm_id = ttk.Frame(self)
+        self.frm_name = ttk.Frame(self)
+        self.frm_type = ttk.Frame(self)
+        self.frm_min_bid = ttk.Frame(self)
+        self.frm_highest_bid = ttk.Frame(self)
+        self.frm_select = ttk.Frame(self)
 
         self.init_item_name()
-        self.init_item_price()
         self.init_item_type()
-        self.init_select()
+        self.init_min_bid()
+        self.init_highest_bid()
 
     def init_item_name(self):
         """Initiates the name label for the listing"""
-        self.lbl_item_name = ttk.Label(self, text=self.name)
-        self.lbl_item_name.grid(row=0, column=0, padx=15, sticky="e")
-
-    def init_item_price(self):
-        """Initiates the price label for the listing"""
-        self.lbl_item_price = ttk.Label(self, text=str(self.price))
-        self.lbl_item_price.grid(row=0, column=1, padx=15, sticky="e")
+        ttk.Label(self.frm_name, text="Name").grid(row=0, column=0)
+        ttk.Label(self.frm_name, text=self.name).grid(row=1, column=0)
 
     def init_item_type(self):
         """Initiates the type label for the listing"""
-        self.lbl_item_type = ttk.Label(self, text=self.type)
-        self.lbl_item_type.grid(row=0, column=2, padx=15, sticky="e")
+        ttk.Label(self.frm_type, text="Type").grid(row=0, column=0)
+        ttk.Label(self.frm_type, text=self.type).grid(row=1, column=0)
 
-    def init_select(self):
-        """Initiates the Select button for the listing"""
-        self.btn_select = ttk.Button(self, text="Select")
-        self.btn_select.grid(row=0, column=3, padx=15, sticky="e")
+    def init_min_bid(self):
+        """Initiates the minimum bid label for the listing"""
+        ttk.Label(self.frm_min_bid, text="Minimum Bid").grid(row=0, column=0)
+        ttk.Label(self.frm_min_bid, text=self.min_bid).grid(row=1, column=0)
+
+    def init_highest_bid(self):
+        """Initiates the highest bid label for the listing"""
+        ttk.Label(self.frm_highest_bid, text="Highest Bid").grid(
+            row=0, column=0)
+        ttk.Label(self.frm_highest_bid, text=self.highest_bid).grid(
+            row=1, column=0)

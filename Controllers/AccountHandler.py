@@ -66,7 +66,26 @@ class AccountHandler:
 
         return self.db_handler.get_receipts(account_id)
 
+    def update_username(self, account_id, new_username):
+        """Updates username in the database"""
+        # ManageAccountTk -> MainController ->
+
+        self.db_handler.update_username(account_id, new_username)
+
+    def update_email(self, account_id, new_email):
+        """Updates email in the database"""
+        # ManageAccountTk -> MainController ->
+
+        self.db_handler.update_email(account_id, new_email)
+
+    def update_bio(self, account_id, new_bio):
+        """Updates bio in the database"""
+        # ManageAccountTk -> MainController ->
+
+        self.db_handler.update_bio(account_id, new_bio)
+
     def update_pw(self, account_id, new_pw):
         """Updates password in the database"""
         # ManageAccountTk -> ListingsFrame -> main -> MainController ->
+
         self.db_handler.update_pw(account_id, new_pw)

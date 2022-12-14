@@ -1,11 +1,9 @@
-from tkinter import *
-from tkinter import ttk
 from Views.Components.Listing import Listing
+from tkinter import ttk
+import Models.Validator as Validator
 
-RIDGE_PAD = 2
 
-
-class BuyListing(Listing):
+class GenericListing(Listing):
     def __init__(self, master, traceback, item):
         super().__init__(master, traceback, item)
 
@@ -27,16 +25,16 @@ class BuyListing(Listing):
 
     def init_select(self):
         """Initiates the Select button for the listing"""
-        ttk.Button(self.frm_select, text="Raise Offer",
-                   command=self.raise_offer).grid(row=0, column=0)
-        ttk.Button(self.frm_select, text="Remove Offer",
-                   command=self.remove_offer).grid(row=1, column=0)
+        self.entry_offer = ttk.Entry(self.frm_select)
+        self.entry_offer.grid(row=0, column=0)
+        ttk.Button(self.frm_select, text="Make Offer",
+                   command=self.make_offer).grid(row=1, column=0)
 
     def get_seller_account_info(self):
         pass
 
-    def raise_offer(self):
-        pass
-
-    def remove_offer(self):
-        pass
+    def make_offer(self):
+        offer = self.entry_offer.get()
+        if Validator.validate_offer(self.min_bid, self.highest_bid, offer):
+            self.traceback.set_highest_bid(self.item.get_item_id, offer)
+            self.traceback.refresh_listings()
