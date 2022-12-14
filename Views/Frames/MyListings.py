@@ -9,6 +9,7 @@ from Views.Components.SellListing import SellListing
 
 RIDGE_PAD = 2
 
+
 class MyListings(ttk.Frame):
     """Represents a MyListings UI object"""
 
@@ -29,8 +30,8 @@ class MyListings(ttk.Frame):
             self.frame_sell_listings, text="+", command=self.display_create_listing_tk)
         self.btn_create_listing.pack(fill=BOTH, side=RIGHT)
 
-        self.frame_sell_listings.place(x=RIDGE_PAD*2,y=RIDGE_PAD*2)
-        self.display_users_listings(self.frm_container)
+        self.frame_sell_listings.place(x=RIDGE_PAD*2, y=RIDGE_PAD*2)
+        self.display_users_listings()
 
         # create label for Buyer side
         ttk.Label(self, text="Buyer").grid(row=0, column=1)
@@ -40,19 +41,25 @@ class MyListings(ttk.Frame):
 
     def display_create_listing_tk(self):
         """Calls function of ListingsFrame that creates a CreateListingTk popup window"""
-        
-        self.master.display_create_listing_tk()
-        self.display_users_listings(self.frm_container)
-        #return self.master.display_create_listing_tk()
 
-    def display_users_listings(self, container):
+        self.master.display_create_listing_tk()
+        self.display_users_listings()
+        # return self.master.display_create_listing_tk()
+
+    def display_users_listings(self):
         """Displays the current user's item listings"""
         items = self.master.display_users_listings()
         for i in range(len(items)):
             self.frame_sell_listings.place(x=RIDGE_PAD, y=55*(i+1)+RIDGE_PAD)
-            listing = SellListing(container)#, items[i].get_name, items[i].get_type, items[i].get_minimum_bid).place(x=RIDGE_PAD, y=RIDGE_PAD+(i*55))
+            # , items[i].get_name, items[i].get_type, items[i].get_minimum_bid).place(x=RIDGE_PAD, y=RIDGE_PAD+(i*55))
+            listing = SellListing(self.frm_container)
             listing.place(x=RIDGE_PAD, y=RIDGE_PAD+(i*55))
             # second index accesses the data points of the item
             # 0 - item name, 1 - item type, 2 - item min bid
             listing.fill_labels(items[i][0], items[i][1], items[i][2])
-        
+
+    def refresh_sell_listings(self):
+        """Requests the View to re-gather sell listings"""
+        # CreateAccountTk -> MainFrame -> ListingsFrame ->
+
+        self.display_users_listings()

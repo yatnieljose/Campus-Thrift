@@ -73,14 +73,19 @@ class ListingsFrame(ttk.Frame):
     def display_users_listings(self):
         """Displays the listings of the current user"""
         # MyListings ->
-        items = self.master.get_users_items()
-        return items
+        return self.master.get_users_items()
 
     def display_item_listings(self):
         """Displays the listings of items available for sale"""
         # ListingsSearch ->
-        items = self.master.get_item_listings()
-        return items
+        return self.master.get_item_listings()
+
+    def refresh_sell_listings(self):
+        """Refreshes sell listings after a new item is created by the user. Can only be called when 
+        MyListings is in control"""
+        # CreateAccountTk -> MainFrame ->
+
+        self.frame_my_listings.refresh_sell_listings()
 
     def logout(self):
         self.master.logout()

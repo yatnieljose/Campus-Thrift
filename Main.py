@@ -59,7 +59,7 @@ class MainFrame(ttk.Frame):
 
     def get_users_items(self):
         """Gets the current users items to display in the window"""
-        # MyListings -> ListingsFrame -> 
+        # MyListings -> ListingsFrame ->
         items = self.controller.get_users_items()
         return items
 
@@ -88,11 +88,18 @@ class MainFrame(ttk.Frame):
         create_listing_tk = CreateListingTk(self.controller, self)
         create_listing_tk.mainloop()
 
+    def refresh_sell_listings(self):
+        """Refreshes the Sell Listings of the user after a new item is created"""
+        # CreateListingTk ->
+
+        self.frame_listings_frame.refresh_sell_listings()
+
     def get_rank(self):
         return self.controller.current_account.get_rank
 
     def get_completed_transactions(self):
         return self.controller.current_account.get_num_completed
+
 
 def main():
     """Main function for this module"""

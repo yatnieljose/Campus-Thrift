@@ -1,6 +1,7 @@
-from tkinter import Tk, ttk, PhotoImage, messagebox
+from tkinter import Tk, ttk, PhotoImage, messagebox, StringVar
 import Views.Styling.ct_tk as ct_tk
 import Views.Styling.ct_style as ct_style
+import Models.TypeOptions as TypeOptions
 
 
 class CreateListingTk(Tk):
@@ -38,9 +39,13 @@ class CreateListingTk(Tk):
         self.entry_name.grid(row=0, column=1)
 
         # Type row
+        self.clicked = StringVar(self.frame_content)
+        self.clicked.set(TypeOptions.type_options[0])
+
         ttk.Label(self.frame_content, text="Type : ").grid(row=1, column=0)
-        self.entry_type = ttk.Entry(self.frame_content)
-        self.entry_type.grid(row=1, column=1)
+        self.drop_type = ttk.OptionMenu(
+            self.frame_content, self.clicked, TypeOptions.type_options[0], *TypeOptions.type_options)
+        self.drop_type.grid(row=1, column=1)
 
         # Minimum Bid row
         ttk.Label(self.frame_content, text="Minimum Bid : ").grid(
@@ -61,10 +66,11 @@ class CreateListingTk(Tk):
 
         if validation_flag is None:
             item_info = {'name': self.entry_name.get(),
-                         'type': self.entry_type.get(),
+                         'type': self.clicked.get(),
                          'min_bid': int(self.entry_min_bid.get())}
 
             self.controller.create_item(item_info)
+            self.traceback.refresh_sell_listings()
             self.destroy()
 
         else:
@@ -74,7 +80,6 @@ class CreateListingTk(Tk):
         """Validates user input ---  0 < length of name < 50 --- 0 < type < 16 --- 0 < 1,000,000"""
 
         name = self.entry_name
-        type = self.entry_type
         min_bid = self.entry_min_bid
 
         if len(name.get()) < 1 or len(name.get()) > 50:
@@ -82,11 +87,7 @@ class CreateListingTk(Tk):
                                 message="Name must be between 1 and 50 characters")
 
             return name
-        if len(type.get()) < 1 or len(type.get()) > 16:
-            messagebox.showinfo(title='InvalidType',
-                                message="Type name must be between 1 and 16 characters")
 
-            return type
         if int(min_bid.get()) <= 0 or int(min_bid.get()) > 1000000:
             messagebox.showinfo(title='InvalidMinBid',
                                 message="The minimum bid must be between $1 and $1,000,000")
