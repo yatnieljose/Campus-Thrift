@@ -107,3 +107,7 @@ class ListingsFrame(ttk.Frame):
         # GenericListing -> ListingsSearch ->
 
         self.master.set_highest_bid(item_id, offer)
+
+    def display_account_info(self, account_id):
+        """Requests the display of the account info associated with given account ID"""
+        self.master.display_account_info(account_id)

@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 from Models.Item import Item
+from abc import ABC, abstractmethod
 
 
-class Listing(ttk.Frame):
+class Listing(ttk.Frame, ABC):
     """Represents a Listing UI object"""
 
     def __init__(self, master, traceback, item):
@@ -56,3 +57,8 @@ class Listing(ttk.Frame):
             row=0, column=0)
         ttk.Label(self.frm_highest_bid, text=self.highest_bid).grid(
             row=1, column=0)
+
+    @abstractmethod
+    def display_account_info(self):
+        """Requests the display of the account information"""
+        pass

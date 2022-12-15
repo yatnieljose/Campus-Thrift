@@ -103,3 +103,7 @@ class ListingsSearch(ttk.Frame):
             widget.destroy()
 
         self.display_all_listings()
+
+    def display_account_info(self, account_id):
+        """Requests the display of the account information associated with given account ID"""
+        self.master.display_account_info(account_id)

@@ -8,6 +8,7 @@ from Views.Frames.ListingsFrame import ListingsFrame
 from Controllers.MainController import MainController
 from Views.Windows.ManageAccountTk import ManageAccountTk
 from Views.Windows.CreateListingTk import CreateListingTk
+from Views.Windows.DisplayAccountTk import DisplayAccountTk
 
 
 class MainFrame(ttk.Frame):
@@ -99,6 +100,14 @@ class MainFrame(ttk.Frame):
         # GenericListing -> ListingsSearch -> ListingsFrame ->
 
         self.controller.set_highest_bid(item_id, offer)
+
+    def display_account_info(self, account_id):
+        """Requests account info for given account ID, and makes a popup window to display to the user"""
+
+        account = self.controller.get_account(account_id)
+
+        account_display_tk = DisplayAccountTk(account)
+        account_display_tk.mainloop()
 
 
 def main():

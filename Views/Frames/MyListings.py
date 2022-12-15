@@ -79,8 +79,9 @@ class MyListings(ttk.Frame):
 
         self.display_sell_listings()
 
-    def get_seller_account_info(self, seller_id):
-        pass
+    def display_account_info(self, account_id):
+        """Requests the display of the account info associated with given account ID"""
+        self.master.display_account_info(account_id)
 
     def accept_bid(self):
         pass

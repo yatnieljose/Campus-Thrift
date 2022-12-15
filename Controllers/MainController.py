@@ -111,6 +111,11 @@ class MainController:
 
     def set_highest_bid(self, item_id, offer):
         """Requests an update to the highest bid on a specified item"""
-        # GenericListing -> ListingsSearch -> ListingsFrame -> MainFrame -> 
+        # GenericListing -> ListingsSearch -> ListingsFrame -> MainFrame ->
 
-        self.item_handler.set_highest_bid(self.current_account.get_account_id, item_id, offer)
+        self.item_handler.set_highest_bid(
+            self.current_account.get_account_id, item_id, offer)
+
+    def get_account(self, account_id):
+        """Gathers account information for a given account ID"""
+        return self.account_handler.get_account(account_id)

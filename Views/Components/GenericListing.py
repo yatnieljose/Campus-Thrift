@@ -21,7 +21,7 @@ class GenericListing(Listing):
         """Initiates the seller ID label for the listing"""
         ttk.Label(self.frm_id, text="Seller ID").grid(row=0, column=0)
         ttk.Button(self.frm_id, text=self.seller_id,
-                   command=self.get_seller_account_info).grid(row=1, column=0)
+                   command=self.display_account_info).grid(row=1, column=0)
 
     def init_select(self):
         """Initiates the Select button for the listing"""
@@ -30,8 +30,9 @@ class GenericListing(Listing):
         ttk.Button(self.frm_select, text="Make Offer",
                    command=self.make_offer).grid(row=1, column=0)
 
-    def get_seller_account_info(self):
-        pass
+    def display_account_info(self):
+        """Requests the information from the buyer account in the form of a popup window"""
+        self.traceback.display_account_info(self.seller_id)
 
     def make_offer(self):
         offer = self.entry_offer.get()

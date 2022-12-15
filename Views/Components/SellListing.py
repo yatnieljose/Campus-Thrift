@@ -23,7 +23,7 @@ class SellListing(Listing):
         """Initiates the buyer ID of highest bidder label for the listing"""
         ttk.Label(self.frm_id, text="Buyer ID").grid(row=0, column=0)
         ttk.Button(self.frm_id, text=self.buyer_id,
-                   command=self.get_buyer_account_info).grid(row=1, column=0)
+                   command=self.display_account_info).grid(row=1, column=0)
 
     def init_select(self):
         """Initiates the Select button for the listing"""
@@ -32,8 +32,9 @@ class SellListing(Listing):
         ttk.Button(self.frm_select, text="Remove Listing",
                    command=self.remove_listing).grid(row=1, column=0)
 
-    def get_buyer_account_info(self):
-        pass
+    def display_account_info(self):
+        """Requests the information from the buyer account in the form of a popup window"""
+        self.traceback.display_account_info(self.buyer_id)
 
     def accept_offer(self):
         pass
