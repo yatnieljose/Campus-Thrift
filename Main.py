@@ -109,6 +109,14 @@ class MainFrame(ttk.Frame):
         account_display_tk = DisplayAccountTk(account)
         account_display_tk.mainloop()
 
+    def accept_bid(self, sold_item):
+        # SellListing -> MyListings -> ListingsFrame
+        self.controller.accept_bid(sold_item)
+
+    def delete_item(self, item):
+        """Deletes the item"""
+        # SellListing -> MyListings -> ListingsFrame
+        self.controller.delete_item(item)
 
 def main():
     """Main function for this module"""

@@ -50,6 +50,7 @@ class MyListings(ttk.Frame):
     def display_sell_listings(self):
         """Displays the current user's item listings"""
         items = self.master.display_my_listings(True)
+        self.sell_listings.clear()
 
         for item in items:
             self.sell_listings.append(
@@ -76,15 +77,20 @@ class MyListings(ttk.Frame):
     def refresh_sell_listings(self):
         """Requests the View to re-gather sell listings"""
         # CreateAccountTk -> MainFrame -> ListingsFrame ->
-
+        
         self.display_sell_listings()
 
     def display_account_info(self, account_id):
         """Requests the display of the account info associated with given account ID"""
         self.master.display_account_info(account_id)
 
-    def accept_bid(self):
-        pass
+    def accept_bid(self, sold_item):
+        """Accepts offer on an item"""
+        # SellListing ->
+        self.master.accept_bid(sold_item)
 
-    def remove_listing(self):
-        pass
+    def remove_listing(self, item):
+        """Removes item listing"""
+        # SellListing ->
+        self.master.delete_item(item)
+        self.refresh_sell_listings()

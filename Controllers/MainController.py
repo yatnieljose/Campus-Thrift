@@ -119,3 +119,12 @@ class MainController:
     def get_account(self, account_id):
         """Gathers account information for a given account ID"""
         return self.account_handler.get_account(account_id)
+
+    def accept_bid(self, sold_item):
+        # SellListing -> MyListing -> ListingsFrame -> MainFrame ->
+        self.transaction_handler.completed_transaction(sold_item)
+
+    def delete_item(self, item):
+        """Deletes the item"""
+        # SellListing -> MyListings -> ListingsFrame -> MainFrame
+        self.item_handler.delete_item(item)

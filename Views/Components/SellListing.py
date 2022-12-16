@@ -1,6 +1,7 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from Views.Components.Listing import Listing
+from Models.Item import Item
 
 RIDGE_PAD = 2
 
@@ -37,7 +38,12 @@ class SellListing(Listing):
         self.traceback.display_account_info(self.buyer_id)
 
     def accept_offer(self):
-        pass
+        """Seller accepts the offer on an item"""
+        if(self.buyer_id != None):
+            self.traceback.accept_bid(self.item)
+        else:
+            pass
+            #messagebox.showinfo("No offer has been made")
 
     def remove_listing(self):
-        pass
+        self.traceback.remove_listing(self.item)

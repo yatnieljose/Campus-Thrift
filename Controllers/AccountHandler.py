@@ -63,8 +63,11 @@ class AccountHandler:
     def get_receipts(self, account_id):
         """Gets ReceiptID of all receipts associated with the input AccountId"""
         # Account ->
+        receipts = self.db_handler.get_receipts(account_id)
+        if (receipts == None):
+            receipts = 0
 
-        return self.db_handler.get_receipts(account_id)
+        return receipts
 
     def update_username(self, account_id, new_username):
         """Updates username in the database"""

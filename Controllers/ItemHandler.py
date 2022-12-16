@@ -44,3 +44,8 @@ class ItemHandler:
         # GenericListing -> ListingsSearch -> ListingsFrame -> MainFrame -> MainController -> 
 
         self.db_handler.set_highest_bid(account_id, item_id, offer)
+
+    def delete_item(self, item):
+        """Deletes the item"""
+        # SellListing -> MyListings -> ListingsFrame ->
+        self.db_handler.delete_item(item.get_item_id)

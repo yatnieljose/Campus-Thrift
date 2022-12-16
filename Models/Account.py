@@ -1,5 +1,5 @@
 """Contains the Account class"""
-
+from math import ceil
 
 class Account:
     """Represents all information regarding an Account in the system"""
@@ -96,8 +96,9 @@ class Account:
 
     def retrieve_receipts(self):
         """Returns ReceiptId of all receipts associated with this account from the database"""
-
-        return self._account_handler.get_receipts(self._account_id)
+        completed = self._account_handler.get_receipts(self._account_id)
+        self.set_rank = (ceil(completed/5))
+        return 
 
     # unnecessary if we update this when receipt is added to database (we just havent done that yet)
     def add_receipt(self, receipt_id):

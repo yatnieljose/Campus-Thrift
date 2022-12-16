@@ -238,3 +238,36 @@ class DbHandler:
                             )
 
         self.conn.commit()
+
+    def item_sold(self, item_id):
+        """Removes a sold item"""
+
+        self.cursor.execute(f"""
+                        DELETE
+                        FROM Items
+                        WHERE ItemId="{item_id}"
+                        """
+                            )
+        
+        self.conn.commit()
+
+    def delete_item(self, item_id):
+        """Deletes the item"""
+
+        self.cursor.execute(f"""
+                            DELETE
+                            FROM Items
+                            WHERE ItemId="{item_id}"
+                            """
+                            )
+
+#    def create_receipt(self, item_id, buyer_id, seller_id):
+#        """"Creates a receipt entry"""
+
+#        self.cursor.execute(f"""
+#                            INSERT INTO Receipts
+#                            (ItemId, BuyerId, SellerId)
+#                            VALUES
+#                            ("{item_id}", "{buyer_id}", "{seller_id}")""")
+
+#        self.conn.commit()

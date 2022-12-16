@@ -111,3 +111,12 @@ class ListingsFrame(ttk.Frame):
     def display_account_info(self, account_id):
         """Requests the display of the account info associated with given account ID"""
         self.master.display_account_info(account_id)
+
+    def accept_bid(self, sold_item):
+        # SellListing -> MyListings ->
+        self.master.accept_bid(sold_item)
+
+    def delete_item(self, item):
+        # SellListing -> MyListings
+        """Deletes the item"""
+        self.master.delete_item(item)
